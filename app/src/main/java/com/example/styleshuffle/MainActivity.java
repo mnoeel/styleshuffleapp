@@ -14,6 +14,18 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.firebase.auth.FirebaseUser;
 
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
+//import com.example.styleshuffle.databinding.ActivityMain2Binding;
+import com.example.styleshuffle.databinding.ActivityMainBinding;
+
+
 //import com.google.firebase.ktx.Firebase;
 
 
@@ -23,15 +35,27 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    private ActivityMainBinding binding;
+
     private Button btnLogout;
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main2);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navView, navController);
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -45,21 +69,40 @@ public class MainActivity extends AppCompatActivity {
 
                 logout();
 
-            } }); }
+            }
+        });
+
+
+        mAuth = FirebaseAuth.getInstance();
+
+        btnLogout = findViewById(R.id.btnLogout);
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View v) {
+
+                logout();
+
+            }
+        });
+    }
+
 
     @Override
 
-    public void onStart(){
+    public void onStart() {
 
         super.onStart();
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if(currentUser==null)
+        if (currentUser == null) {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
-        { startActivity(new Intent(MainActivity.this, LoginActivity.class));
-
-        } }
+        }
+    }
 
     public void logout() {
 
@@ -67,4 +110,5 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
-    }}
+    }
+}

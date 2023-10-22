@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "452292923206",
+    "project_id": "styleshuffle-f112e",
+    "storage_bucket": "styleshuffle-f112e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452292923206:android:008fd7429cdb61bc805f47",
+        "android_client_info": {
+          "package_name": "com.example.styleshuffle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmy0PDFFjx8pKwqlbQNivPCxrD64xSHB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
