@@ -8,15 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.styleshuffle.DataModel.ClosetItem;
-import com.example.styleshuffle.DataModel.ItemDAO;
+import com.example.styleshuffle.DataModel.BottomItem;
+import com.example.styleshuffle.DataModel.BottomItemDAO;
 import com.example.styleshuffle.DataModel.UserDatabase;
 import com.example.styleshuffle.R;
 import com.example.styleshuffle.databinding.FragmentShuffleBinding;
@@ -29,7 +27,7 @@ public class ShuffleFragment extends Fragment {
     ImageView shirtImage;
     Button shuffleButton;
     View view;
-    ItemDAO itemDAO;
+    BottomItemDAO bottomItemDAO;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,12 +37,12 @@ public class ShuffleFragment extends Fragment {
         shuffleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemDAO = UserDatabase.getDBInstance(requireContext()).itemDAO();
+                bottomItemDAO = UserDatabase.getDBInstance(requireContext()).bottomItemDAO();
                 // Generate a random index
                 Random random = new Random();
-                int randomIndex = random.nextInt(itemDAO.getAllClosetItems().size());
+                int randomIndex = random.nextInt(bottomItemDAO.getAllBottomItems().size());
                 // Get the random item
-                ClosetItem randomItem = itemDAO.getAllClosetItems().get(randomIndex);
+                BottomItem randomItem = bottomItemDAO.getAllBottomItems().get(randomIndex);
                 if (randomItem != null) {
                     byte[] imageBytes = randomItem.getImage();
                     Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);

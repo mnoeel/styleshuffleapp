@@ -10,22 +10,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.styleshuffle.DataModel.ClosetItem;
-import com.example.styleshuffle.DataModel.DataConverter;
-import com.example.styleshuffle.DataModel.ItemDAO;
+import com.example.styleshuffle.DataModel.BottomItem;
+import com.example.styleshuffle.DataModel.BottomItemDAO;
+import com.example.styleshuffle.DataModel.UserDataConverter;
 import com.example.styleshuffle.DataModel.UserDatabase;
 import com.example.styleshuffle.R;
 import com.example.styleshuffle.databinding.FragmentAddBinding;
-import com.example.styleshuffle.ui.home.ClosetFragment;
 
 public class AddFragment extends Fragment {
 
@@ -37,40 +32,23 @@ public class AddFragment extends Fragment {
     ImageView imageView;
     Bitmap bmpImage;
     EditText color, season;
-    ItemDAO itemDAO;
+    BottomItemDAO bottomItemDAO;
     private View view;
-
-
-
-
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        //NotificationsViewModel notificationsViewModel =
-              //  new ViewModelProvider(this).get(NotificationsViewModel.class);
-
-        //binding = FragmentAddBinding.inflate(inflater, container, false);
-       // View root = binding.getRoot();
         view = inflater.inflate(R.layout.fragment_add, container, false);
-
-        //final TextView textView = binding.textNotifications;
-        //notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
         imageView = view.findViewById(R.id.itemImage);
         camera_open_id = view.findViewById(R.id.camera_button);
         color = view.findViewById(R.id.colorOfItem);
         season = view.findViewById(R.id.seasonOfItem);
-
         saveButton = view.findViewById(R.id.save_button);
-        itemDAO = UserDatabase.getDBInstance(requireContext()).itemDAO();
-
+        bottomItemDAO = UserDatabase.getDBInstance(requireContext()).bottomItemDAO();
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveItem();
             }
         });
-
         camera_open_id.setOnClickListener(v -> {
             // Create the camera_intent ACTION_IMAGE_CAPTURE it will open the camera for capture the image
             Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -79,32 +57,11 @@ public class AddFragment extends Fragment {
         });
         return view;
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
-    public void showItems(View view) {
-        // Create an instance of the ClosetFragment
-        ClosetFragment closetFragment = new ClosetFragment();
-
-// Get the fragment manager and start a transaction
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-// Replace the current fragment with the ClosetFragment
-        transaction.replace(R.id.closetfragment, closetFragment); // R.id.fragment_container is the ID of the layout container in your activity
-
-// Add the transaction to the back stack (optional)
-        transaction.addToBackStack(null);
-
-// Commit the transaction
-        transaction.commit();
-
-    }
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // Match the request 'pic id with requestCode
@@ -121,11 +78,11 @@ public class AddFragment extends Fragment {
         ) {
             Toast.makeText(requireContext(), "User Data is Missing", Toast.LENGTH_SHORT).show();
         } else {
-            ClosetItem closetItem = new ClosetItem();
-            closetItem.setColorOfItem(color.getText().toString());
-            closetItem.setSeasonOfItem(season.getText().toString());
-            closetItem.setImage(DataConverter.convertImage2ByteArray(bmpImage));
-            itemDAO.insertClosetItem(closetItem);
+            BottomItem bottomItem = new BottomItem();
+            bottomItem.setColorOfItem(color.getText().toString());
+            bottomItem.setSeasonOfItem(season.getText().toString());
+            bottomItem.setImage(UserDataConverter.convertImage2ByteArray(bmpImage));
+            bottomItemDAO.insertBottomItem(bottomItem);
             Toast.makeText(
                     requireContext(),
                     "Insertion successful",

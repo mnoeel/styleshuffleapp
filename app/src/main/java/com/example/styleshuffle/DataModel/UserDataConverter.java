@@ -5,7 +5,7 @@ import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
 
-public class DataConverter {
+public class UserDataConverter {
 
     public static byte[] convertImage2ByteArray(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

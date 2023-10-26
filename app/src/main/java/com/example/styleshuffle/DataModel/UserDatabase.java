@@ -8,7 +8,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 @Database(
-        entities = ClosetItem.class,
+        entities = BottomItem.class,
         version = 1,
         exportSchema = false
 )
@@ -16,7 +16,7 @@ public abstract class UserDatabase extends RoomDatabase {
 
         private static UserDatabase userDB = null;
 
-        public abstract ItemDAO itemDAO();
+        public abstract BottomItemDAO bottomItemDAO();
 
         public static synchronized UserDatabase getDBInstance(Context context) {
             if(userDB == null) {

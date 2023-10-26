@@ -1,29 +1,30 @@
-package com.example.styleshuffle;
+package com.example.styleshuffle.Recycler;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.styleshuffle.DataModel.ClosetItem;
-import com.example.styleshuffle.DataModel.DataConverter;
-import com.example.styleshuffle.DataModel.ItemDAO;
+import com.example.styleshuffle.DataModel.BottomItem;
+import com.example.styleshuffle.DataModel.UserDataConverter;
+import com.example.styleshuffle.DataModel.BottomItemDAO;
+import com.example.styleshuffle.R;
+import com.example.styleshuffle.DataModel.UserViewHolder;
 
 import java.util.List;
 
-public class UserRecycler extends RecyclerView.Adapter<UserViewHolder> {
+public class BottomUserRecycler extends RecyclerView.Adapter<UserViewHolder> {
 
-    public List<ClosetItem> data;
-    private ItemDAO itemDAO;
+    public List<BottomItem> data;
+    private BottomItemDAO bottomItemDAO;
     private boolean isDeleteMode;
 
-    public UserRecycler(List<ClosetItem> closetItems,ItemDAO itemDAO, boolean isDeleteMode) {
-        data = closetItems;
-        this.itemDAO = itemDAO;
+    public BottomUserRecycler(List<BottomItem> bottomItems, BottomItemDAO bottomItemDAO, boolean isDeleteMode) {
+        data = bottomItems;
+        this.bottomItemDAO = bottomItemDAO;
         this.isDeleteMode = isDeleteMode;
     }
 
@@ -40,21 +41,22 @@ public class UserRecycler extends RecyclerView.Adapter<UserViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int i) {
-        final ClosetItem closetItem = data.get(i);
-        byte[] imageByteArray = closetItem.getImage();
+        final BottomItem bottomItem = data.get(i);
+        byte[] imageByteArray = bottomItem.getImage();
         if (imageByteArray != null) {
-            holder.imageView.setImageBitmap(DataConverter.convertByteArray2Image(imageByteArray));
+            holder.imageView.setImageBitmap(UserDataConverter.convertByteArray2Image(imageByteArray));
         }
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+       /* holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 if (isDeleteMode) {
                     // Handle long-click event in delete mode
                     // Remove the item from the adapter
-                    removeItem(i);
 
                     // Remove the item from the database
+                    ClosetItem itemToDelete = data.get(i);
                     itemDAO.deleteClosetItem(closetItem);
+                    removeItem(holder.getAdapterPosition());
                     return true;
                 } else {
                     // Handle long-click event in normal mode (if needed)
@@ -62,7 +64,7 @@ public class UserRecycler extends RecyclerView.Adapter<UserViewHolder> {
                     return false;
                 }
             }
-        });
+        }); */
     }
 
     public void removeItem(int position) {

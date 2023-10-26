@@ -11,16 +11,16 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface ItemDAO {
-    @Query("Select  * from Items")
-    List<ClosetItem> getAllClosetItems();
+public interface BottomItemDAO {
+    @Query("Select  * from BottomItems")
+    List<BottomItem> getAllBottomItems();
 
     @Insert
-    void insertClosetItem(ClosetItem closetItem);
+    void insertBottomItem(BottomItem bottomItem);
 
     @Update
-    void updateClosetItem(ClosetItem closetItem);
+    void updateClosetItem(BottomItem bottomItem);
 
     @Delete
-    void deleteClosetItem(ClosetItem closetItem);
+    void deleteClosetItem(BottomItem bottomItem);
 }
