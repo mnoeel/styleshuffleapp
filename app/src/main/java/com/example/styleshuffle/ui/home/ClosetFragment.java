@@ -45,6 +45,7 @@ public class ClosetFragment extends Fragment {
         UserRecycler userRecycler = new UserRecycler(itemDAO.getAllClosetItems(),itemDAO, isDeleteMode);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(userRecycler);
+        toggleButton=view.findViewById(R.id.toggleDeleteMode);
         buttonShirt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
