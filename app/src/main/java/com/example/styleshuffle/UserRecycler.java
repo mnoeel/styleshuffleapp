@@ -16,7 +16,7 @@ import java.util.List;
 
 public class UserRecycler extends RecyclerView.Adapter<UserViewHolder> {
 
-    List<ClosetItem> data;
+    public List<ClosetItem> data;
 
     public UserRecycler(List<ClosetItem> closetItems) {
         data = closetItems;
@@ -39,6 +39,11 @@ public class UserRecycler extends RecyclerView.Adapter<UserViewHolder> {
         if (imageByteArray != null) {
             holder.imageView.setImageBitmap(DataConverter.convertByteArray2Image(imageByteArray));
         }
+    }
+
+    public void removeItem(int position) {
+        data.remove(position);
+        notifyItemRemoved(position);
     }
 
     @Override

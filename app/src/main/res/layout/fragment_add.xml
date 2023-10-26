@@ -6,17 +6,17 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".ui.notifications.AddFragment">
 
-<Button
-    android:id="@+id/camera_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Take Picture"
-    app:layout_constraintBottom_toTopOf="@+id/button3"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.148"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.311" />
+    <Button
+        android:id="@+id/camera_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Take Picture"
+        app:layout_constraintBottom_toTopOf="@+id/colorOfItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.148"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.311" />
 
 <ImageView
     android:id="@+id/itemImage"
@@ -57,31 +57,18 @@ tools:context=".ui.notifications.AddFragment">
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="0.85" />
 
-<Button
-    android:id="@+id/save_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:onClick="saveItem"
-    android:text="Save"
-    app:layout_constraintBottom_toTopOf="@+id/button3"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.839"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.311" />
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="saveItem"
+        android:text="Save"
+        app:layout_constraintBottom_toTopOf="@+id/colorOfItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.839"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.311" />
 
-<Button
-    android:id="@+id/button3"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:onClick="showItems"
-    android:text="Show Items"
-    app:layout_constraintBottom_toTopOf="@+id/colorOfItem"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.498"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.786" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
