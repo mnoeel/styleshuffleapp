@@ -24,10 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClosetFragment extends Fragment {
-
-    private ToggleButton toggleButton;
     private boolean isDeleteMode = false;
-
+    private ToggleButton toggleButton;
 
     private Button buttonShirt;
     private RecyclerView recyclerView;
@@ -36,7 +34,7 @@ public class ClosetFragment extends Fragment {
     ItemDAO itemDAO;
     private List<ClosetItem> items;
     int position;
-    int deleteCondition;
+    public int deleteCondition;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,7 +42,7 @@ public class ClosetFragment extends Fragment {
         buttonShirt = view.findViewById(R.id.buttonShirt);
         recyclerView = view.findViewById(R.id.horGridView);
         itemDAO = UserDatabase.getDBInstance(requireContext()).itemDAO();
-        UserRecycler userRecycler = new UserRecycler(itemDAO.getAllClosetItems());
+        UserRecycler userRecycler = new UserRecycler(itemDAO.getAllClosetItems(),itemDAO, isDeleteMode);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(userRecycler);
         buttonShirt.setOnClickListener(new View.OnClickListener() {
@@ -61,13 +59,16 @@ public class ClosetFragment extends Fragment {
             }
         });
 
-        toggleButton.setOnClickListener(new View.OnClickListener() {
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Update the mode based on the button's state
                 Toast.makeText(getContext(), "Long click the ingredient you want to delete!", Toast.LENGTH_SHORT).show();
-                deleteCondition = 1;
+                isDeleteMode = isChecked;
             }
         });
+
         return view;
+
     }
 }
