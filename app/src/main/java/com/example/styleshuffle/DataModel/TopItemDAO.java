@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface TopItemDAO {
     @Query("Select  * from TopItems")
-    List<BottomItem> getAllTopItems();
+    List<TopItem> getAllTopItems();
 
     @Insert
     void insertTopItem(TopItem topItem);

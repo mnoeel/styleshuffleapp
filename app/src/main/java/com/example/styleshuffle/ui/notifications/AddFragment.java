@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.styleshuffle.DataModel.BottomItem;
 import com.example.styleshuffle.DataModel.BottomItemDAO;
 import com.example.styleshuffle.DataModel.ShoeItemDAO;
 import com.example.styleshuffle.DataModel.TopItem;
@@ -141,24 +142,7 @@ public class AddFragment extends Fragment {
         binding = null;
     }
 
-    public void showItems(View view) {
-        // Create an instance of the ClosetFragment
-        ClosetFragment closetFragment = new ClosetFragment();
 
-// Get the fragment manager and start a transaction
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-// Replace the current fragment with the ClosetFragment
-        transaction.replace(R.id.closetfragment, closetFragment); // R.id.fragment_container is the ID of the layout container in your activity
-
-// Add the transaction to the back stack (optional)
-        transaction.addToBackStack(null);
-
-// Commit the transaction
-        transaction.commit();
-
-    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -190,6 +174,13 @@ public class AddFragment extends Fragment {
                     topItem.setSeasonOfItem(selectedSeason);
                     topItem.setImage(UserDataConverter.convertImage2ByteArray(bmpImage));
                     topItemDAO.insertTopItem(topItem);
+                    break;
+                case "Bottom":
+                    BottomItem bottomItem = new BottomItem();
+                    bottomItem.setColorOfItem(selectedColor);
+                    bottomItem.setSeasonOfItem(selectedSeason);
+                    bottomItem.setImage(UserDataConverter.convertImage2ByteArray(bmpImage));
+                    bottomItemDAO.insertBottomItem(bottomItem);
                     break;
             }
             Toast.makeText(

@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.styleshuffle.DataModel.BottomItem;
 import com.example.styleshuffle.DataModel.BottomItemDAO;
+import com.example.styleshuffle.DataModel.ShoeItemDAO;
+import com.example.styleshuffle.DataModel.TopItemDAO;
 import com.example.styleshuffle.DataModel.UserDatabase;
 import com.example.styleshuffle.R;
 import com.example.styleshuffle.Recycler.BottomUserRecycler;
@@ -25,24 +27,26 @@ public class ClosetFragment extends Fragment {
     private boolean isDeleteMode = false;
     private ToggleButton toggleButton;
 
-    private Button buttonShirt;
+    private Button buttonTops;
     private RecyclerView bottomRecyclerView;
     private ImageAdapter adapter;
     private boolean isGridViewVisible = false;
     BottomItemDAO bottomItemDAO;
+    TopItemDAO topItemDAO;
+    ShoeItemDAO shoeItemDAO;
     private List<BottomItem> items;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_closet, container, false);
-        buttonShirt = view.findViewById(R.id.buttonShirt);
+        buttonTops = view.findViewById(R.id.buttonTops);
         bottomRecyclerView = view.findViewById(R.id.horGridView);
         bottomItemDAO = UserDatabase.getDBInstance(requireContext()).bottomItemDAO();
         BottomUserRecycler bottomUserRecycler = new BottomUserRecycler(bottomItemDAO.getAllBottomItems(), bottomItemDAO, isDeleteMode);
         bottomRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         bottomRecyclerView.setAdapter(bottomUserRecycler);
         toggleButton=view.findViewById(R.id.toggleDeleteMode);
-        buttonShirt.setOnClickListener(new View.OnClickListener() {
+        buttonTops.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isGridViewVisible) {
