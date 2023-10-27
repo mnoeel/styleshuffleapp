@@ -13,4 +13,7 @@
     <string name="title_home">Closet</string>
     <string name="title_dashboard">Shuffle</string>
     <string name="title_notifications">Add</string>
+    <string name="selectC">Select Color</string>
+    <string name="selectS">Select Season</string>
+    <string name="selectI">Select Clothing Category</string>
 </resources>
