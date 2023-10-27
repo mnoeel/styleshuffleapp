@@ -22,10 +22,8 @@ public class ShoeUserRecycler extends RecyclerView.Adapter<UserViewHolder> {
     private ShoeItemDAO shoeItemDAO;
     private boolean isDeleteMode;
 
-    public ShoeUserRecycler(List<ShoeItem> shoeItems, ShoeItemDAO shoeItemDAO, boolean isDeleteMode) {
+    public ShoeUserRecycler(List<ShoeItem> shoeItems) {
         data = shoeItems;
-        this.shoeItemDAO = shoeItemDAO;
-        this.isDeleteMode = isDeleteMode;
     }
 
     @NonNull

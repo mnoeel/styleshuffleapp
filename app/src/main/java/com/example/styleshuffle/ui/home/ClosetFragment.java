@@ -25,11 +25,8 @@ import java.util.List;
 
 public class ClosetFragment extends Fragment {
     private boolean isDeleteMode = false;
-    private ToggleButton toggleButton;
-
-    private Button buttonTops;
+    private Button buttonBottoms;
     private RecyclerView bottomRecyclerView;
-    private ImageAdapter adapter;
     private boolean isGridViewVisible = false;
     BottomItemDAO bottomItemDAO;
     TopItemDAO topItemDAO;
@@ -39,14 +36,13 @@ public class ClosetFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_closet, container, false);
-        buttonTops = view.findViewById(R.id.buttonTops);
+        buttonBottoms = view.findViewById(R.id.buttonBottoms);
         bottomRecyclerView = view.findViewById(R.id.horGridView);
         bottomItemDAO = UserDatabase.getDBInstance(requireContext()).bottomItemDAO();
-        BottomUserRecycler bottomUserRecycler = new BottomUserRecycler(bottomItemDAO.getAllBottomItems(), bottomItemDAO, isDeleteMode);
+        BottomUserRecycler bottomUserRecycler = new BottomUserRecycler(bottomItemDAO.getAllBottomItems());
         bottomRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         bottomRecyclerView.setAdapter(bottomUserRecycler);
-        toggleButton=view.findViewById(R.id.toggleDeleteMode);
-        buttonTops.setOnClickListener(new View.OnClickListener() {
+        buttonBottoms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isGridViewVisible) {
@@ -57,15 +53,6 @@ public class ClosetFragment extends Fragment {
                     isGridViewVisible = true;
 
                 }
-            }
-        });
-
-        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // Update the mode based on the button's state
-                Toast.makeText(getContext(), "Long click the ingredient you want to delete!", Toast.LENGTH_SHORT).show();
-                isDeleteMode = isChecked;
             }
         });
         return view;

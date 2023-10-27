@@ -22,10 +22,8 @@ import java.util.List;
     private TopItemDAO topItemDAO;
     private boolean isDeleteMode;
 
-    public TopUserRecycler(List<TopItem> topItems, TopItemDAO topItemDAO, boolean isDeleteMode) {
+    public TopUserRecycler(List<TopItem> topItems) {
         data = topItems;
-        this.topItemDAO = topItemDAO;
-        this.isDeleteMode = isDeleteMode;
     }
     @NonNull
     @Override

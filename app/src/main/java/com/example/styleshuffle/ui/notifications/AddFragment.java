@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.styleshuffle.DataModel.BottomItem;
 import com.example.styleshuffle.DataModel.BottomItemDAO;
+import com.example.styleshuffle.DataModel.ShoeItem;
 import com.example.styleshuffle.DataModel.ShoeItemDAO;
 import com.example.styleshuffle.DataModel.TopItem;
 import com.example.styleshuffle.DataModel.TopItemDAO;
@@ -66,9 +67,12 @@ public class AddFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add, container, false);
-
         imageView = view.findViewById(R.id.itemImage);
         camera_open_id = view.findViewById(R.id.camera_button);
+        saveButton = view.findViewById(R.id.save_button);
+        topItemDAO = UserDatabase.getDBInstance(requireContext()).topItemDAO();
+        bottomItemDAO = UserDatabase.getDBInstance(requireContext()).bottomItemDAO();
+        shoeItemDAO = UserDatabase.getDBInstance(requireContext()).shoeItemDAO();
 
 
         // Color Dropdown
@@ -112,12 +116,6 @@ public class AddFragment extends Fragment {
         });
 
 
-
-        saveButton = view.findViewById(R.id.save_button);
-        topItemDAO = UserDatabase.getDBInstance(requireContext()).topItemDAO();
-        bottomItemDAO = UserDatabase.getDBInstance(requireContext()).bottomItemDAO();
-        shoeItemDAO = UserDatabase.getDBInstance(requireContext()).shoeItemDAO();
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,8 +130,6 @@ public class AddFragment extends Fragment {
             startActivityForResult(camera_intent, pic_id);
         });
         return view;
-
-
     }
 
     @Override
@@ -142,11 +138,8 @@ public class AddFragment extends Fragment {
         binding = null;
     }
 
-
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // Match the request 'pic id with requestCode
         if (requestCode == pic_id) {
             // BitMap is data structure of image file which store the image in memory
             bmpImage = (Bitmap) data.getExtras().get("data");
@@ -155,11 +148,13 @@ public class AddFragment extends Fragment {
         }
     }
 
-    //made this colorOfItem
     public void saveItem() {
         String selectedColor = colorAutoCompleteTextView.getText().toString();
         String selectedSeason = seasonAutoCompleteTextView.getText().toString();
         String selectedCategory = clothesAutoCompleteTextView.getText().toString();
+        colorAutoCompleteTextView.setText("");
+        seasonAutoCompleteTextView.setText("");
+        clothesAutoCompleteTextView.setText("");
         if (TextUtils.isEmpty(selectedColor)
                 || TextUtils.isEmpty(selectedSeason)
                 || TextUtils.isEmpty(selectedCategory)
@@ -167,21 +162,32 @@ public class AddFragment extends Fragment {
         ) {
             Toast.makeText(requireContext(), "User Data is Missing", Toast.LENGTH_SHORT).show();
         } else {
-            switch(selectedCategory) {
-                case "Top":
+            switch (selectedCategory) {
+                case "Tops":
                     TopItem topItem = new TopItem();
                     topItem.setColorOfItem(selectedColor);
                     topItem.setSeasonOfItem(selectedSeason);
                     topItem.setImage(UserDataConverter.convertImage2ByteArray(bmpImage));
                     topItemDAO.insertTopItem(topItem);
                     break;
-                case "Bottom":
+                case "Bottoms":
                     BottomItem bottomItem = new BottomItem();
                     bottomItem.setColorOfItem(selectedColor);
                     bottomItem.setSeasonOfItem(selectedSeason);
                     bottomItem.setImage(UserDataConverter.convertImage2ByteArray(bmpImage));
                     bottomItemDAO.insertBottomItem(bottomItem);
                     break;
+                case "Shoes":
+                    ShoeItem shoeItem = new ShoeItem();
+                    shoeItem.setColorOfItem(selectedColor);
+                    shoeItem.setSeasonOfItem(selectedSeason);
+                    shoeItem.setImage(UserDataConverter.convertImage2ByteArray(bmpImage));
+                    shoeItemDAO.insertShoeItem(shoeItem);
+                    break;
+                default:
+                    Toast.makeText(requireContext(), "Unknown Category",Toast.LENGTH_SHORT).show();
+                    break;
+
             }
             Toast.makeText(
                     requireContext(),

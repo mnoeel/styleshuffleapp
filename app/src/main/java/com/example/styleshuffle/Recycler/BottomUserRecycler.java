@@ -22,10 +22,8 @@ public class BottomUserRecycler extends RecyclerView.Adapter<UserViewHolder> {
     private BottomItemDAO bottomItemDAO;
     private boolean isDeleteMode;
 
-    public BottomUserRecycler(List<BottomItem> bottomItems, BottomItemDAO bottomItemDAO, boolean isDeleteMode) {
+    public BottomUserRecycler(List<BottomItem> bottomItems) {
         data = bottomItems;
-        this.bottomItemDAO = bottomItemDAO;
-        this.isDeleteMode = isDeleteMode;
     }
 
 
