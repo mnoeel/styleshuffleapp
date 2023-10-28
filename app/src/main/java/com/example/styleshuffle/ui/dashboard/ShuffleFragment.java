@@ -26,14 +26,14 @@ import com.example.styleshuffle.databinding.FragmentShuffleBinding;
 import java.util.Random;
 
 public class ShuffleFragment extends Fragment {
-
-    private FragmentShuffleBinding binding;
+    FragmentShuffleBinding binding;
     ImageView bottomsImage;
     ImageView topsImage;
     ImageView shoesImage;
     Button shuffleBottomsBtn;
     Button shuffleTopsBtn;
     Button shuffleShoesBtn;
+    Button shuffleOutfitBtn;
     View view;
     BottomItemDAO bottomItemDAO;
     TopItemDAO topItemDAO;
@@ -48,71 +48,73 @@ public class ShuffleFragment extends Fragment {
         shuffleBottomsBtn = view.findViewById(R.id.shuffleBottomsBtn);
         shuffleTopsBtn = view.findViewById(R.id.shuffleShirtsButton);
         shuffleShoesBtn = view.findViewById(R.id.shuffleShoesButton);
-        shuffleTopsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                topItemDAO = UserDatabase.getDBInstance(requireContext()).topItemDAO();
-                Random random = new Random();
-                int randomIndex = random.nextInt(topItemDAO.getAllTopItems().size());
-                TopItem randomItem = topItemDAO.getAllTopItems().get(randomIndex);
-                if (randomItem != null) {
-                    byte[] imageBytes = randomItem.getImage();
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                    topsImage.setImageBitmap(bitmap);
-                } else {
-                    Toast.makeText(
-                            requireContext(),
-                            "No pictures added",
-                            Toast.LENGTH_SHORT
-                    ).show();
-                }
-
-            }
+        shuffleOutfitBtn = view.findViewById(R.id.shuffleOutfitButton);
+        shuffleTopsBtn.setOnClickListener(v -> {
+            shuffleTops();
         });
-        shuffleBottomsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottomItemDAO = UserDatabase.getDBInstance(requireContext()).bottomItemDAO();
-                Random random = new Random();
-                int randomIndex = random.nextInt(bottomItemDAO.getAllBottomItems().size());
-                BottomItem randomItem = bottomItemDAO.getAllBottomItems().get(randomIndex);
-                if (randomItem != null) {
-                    byte[] imageBytes = randomItem.getImage();
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                    bottomsImage.setImageBitmap(bitmap);
-                } else {
-                    Toast.makeText(
-                            requireContext(),
-                            "No pictures added",
-                            Toast.LENGTH_SHORT
-                    ).show();
-                }
-
-            }
+        shuffleBottomsBtn.setOnClickListener(v -> {
+            shuffleButtoms();
         });
-        shuffleShoesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shoeItemDAO = UserDatabase.getDBInstance(requireContext()).shoeItemDAO();
-                Random random = new Random();
-                int randomIndex = random.nextInt(shoeItemDAO.getAllShoeItems().size());
-                ShoeItem randomItem = shoeItemDAO.getAllShoeItems().get(randomIndex);
-                if (randomItem != null) {
-                    byte[] imageBytes = randomItem.getImage();
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                    shoesImage.setImageBitmap(bitmap);
-                } else {
-                    Toast.makeText(
-                            requireContext(),
-                            "No pictures added",
-                            Toast.LENGTH_SHORT
-                    ).show();
-                }
-
-            }
+        shuffleShoesBtn.setOnClickListener(v -> {
+            shuffleShoes();
         });
-
+        shuffleOutfitBtn.setOnClickListener(v -> {
+            shuffleTops();
+            shuffleButtoms();;
+            shuffleShoes();
+        });
         return view;
+    }
+    public void shuffleTops() {
+        topItemDAO = UserDatabase.getDBInstance(requireContext()).topItemDAO();
+        Random random = new Random();
+        int randomIndex = random.nextInt(topItemDAO.getAllTopItems().size());
+        TopItem randomItem = topItemDAO.getAllTopItems().get(randomIndex);
+        if (randomItem != null) {
+            byte[] imageBytes = randomItem.getImage();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            topsImage.setImageBitmap(bitmap);
+        } else {
+            Toast.makeText(
+                    requireContext(),
+                    "No pictures added",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
+    }
+    public void shuffleButtoms() {
+        bottomItemDAO = UserDatabase.getDBInstance(requireContext()).bottomItemDAO();
+        Random random = new Random();
+        int randomIndex = random.nextInt(bottomItemDAO.getAllBottomItems().size());
+        BottomItem randomItem = bottomItemDAO.getAllBottomItems().get(randomIndex);
+        if (randomItem != null) {
+            byte[] imageBytes = randomItem.getImage();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            bottomsImage.setImageBitmap(bitmap);
+        } else {
+            Toast.makeText(
+                    requireContext(),
+                    "No bottoms to choose from :(",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
+    }
+    public void shuffleShoes() {
+        shoeItemDAO = UserDatabase.getDBInstance(requireContext()).shoeItemDAO();
+        Random random = new Random();
+        int randomIndex = random.nextInt(shoeItemDAO.getAllShoeItems().size());
+        ShoeItem randomItem = shoeItemDAO.getAllShoeItems().get(randomIndex);
+        if (randomItem != null) {
+            byte[] imageBytes = randomItem.getImage();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            shoesImage.setImageBitmap(bitmap);
+        } else {
+            Toast.makeText(
+                    requireContext(),
+                    "No shoes to pick from :(",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
     }
     @Override
     public void onDestroyView() {

@@ -24,8 +24,6 @@ import com.example.styleshuffle.Recycler.BottomUserRecycler;
 import java.util.List;
 
 public class ClosetFragment extends Fragment {
-    private boolean isDeleteMode = false;
-    private Button buttonBottoms;
     private RecyclerView bottomRecyclerView;
     private boolean isGridViewVisible = false;
     BottomItemDAO bottomItemDAO;
@@ -36,23 +34,20 @@ public class ClosetFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_closet, container, false);
-        buttonBottoms = view.findViewById(R.id.buttonBottoms);
+        Button buttonBottoms = view.findViewById(R.id.buttonBottoms);
         bottomRecyclerView = view.findViewById(R.id.horGridView);
         bottomItemDAO = UserDatabase.getDBInstance(requireContext()).bottomItemDAO();
         BottomUserRecycler bottomUserRecycler = new BottomUserRecycler(bottomItemDAO.getAllBottomItems());
         bottomRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         bottomRecyclerView.setAdapter(bottomUserRecycler);
-        buttonBottoms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isGridViewVisible) {
-                    bottomRecyclerView.setVisibility(View.GONE);
-                    isGridViewVisible = false;
-                } else {
-                    bottomRecyclerView.setVisibility(View.VISIBLE);
-                    isGridViewVisible = true;
+        buttonBottoms.setOnClickListener(v -> {
+            if (isGridViewVisible) {
+                bottomRecyclerView.setVisibility(View.GONE);
+                isGridViewVisible = false;
+            } else {
+                bottomRecyclerView.setVisibility(View.VISIBLE);
+                isGridViewVisible = true;
 
-                }
             }
         });
         return view;
