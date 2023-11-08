@@ -13,7 +13,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(
         entities = {BottomItem.class,TopItem.class,ShoeItem.class,Outfit.class},
-        version = 1,
+        version = 2,
         exportSchema = false
 )
 public abstract class UserDatabase extends RoomDatabase {
@@ -35,16 +35,6 @@ public abstract class UserDatabase extends RoomDatabase {
             }
             return userDB;
         }
-    /*public static UserDatabase getDBInstance(Context context) {
-        if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), UserDatabase.class, "my-database")
-                    .fallbackToDestructiveMigration() // Add this line for destructive migration
-                    .addMigrations(MIGRATION_1_2)
-                    .build();
-        }
-        return INSTANCE;
-    }*/
-
 
 }
 

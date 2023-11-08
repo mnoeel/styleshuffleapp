@@ -10,7 +10,6 @@ import com.example.styleshuffle.R;
 
     public class OutfitViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageTop, imageBottom, imageShoes;
-
         public OutfitViewHolder(View itemView) {
             super(itemView);
             imageTop = itemView.findViewById(R.id.topImage);

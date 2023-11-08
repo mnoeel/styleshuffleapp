@@ -8,9 +8,14 @@ import java.io.ByteArrayOutputStream;
 public class UserDataConverter {
 
     public static byte[] convertImage2ByteArray(Bitmap bitmap) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
-        return stream.toByteArray();
+        if (bitmap != null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
+            return stream.toByteArray(); }
+        else {
+            // Handle the case where the Bitmap is null, e.g., log an error or return an appropriate default value.
+            return new byte[0];
+        }
     }
     public static Bitmap convertByteArray2Image(byte[] array) {
         return BitmapFactory.decodeByteArray(array,0,array.length);

@@ -54,19 +54,16 @@ public class AddFragment extends Fragment {
     String[] listSeason = {"Winter", "Spring", "Summer", "Fall"};
     String[] listClothes = {"Tops", "Bottoms", "Shoes"};
 
-    AutoCompleteTextView colorAutoCompleteTextView;
-    AutoCompleteTextView seasonAutoCompleteTextView;
-    AutoCompleteTextView clothesAutoCompleteTextView;
+    AutoCompleteTextView colorAutoCompleteTextView,seasonAutoCompleteTextView,clothesAutoCompleteTextView;
 
-    ArrayAdapter<String> colorAdapter;
-    ArrayAdapter<String> seasonAdapter;
-    ArrayAdapter<String> clothesAdapter;
+    ArrayAdapter<String> colorAdapter,seasonAdapter,clothesAdapter;
 
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add, container, false);
+
         imageView = view.findViewById(R.id.itemImage);
         camera_open_id = view.findViewById(R.id.camera_button);
         saveButton = view.findViewById(R.id.save_button);
@@ -114,7 +111,6 @@ public class AddFragment extends Fragment {
                 Toast.makeText(requireContext(), "Item: " + item, Toast.LENGTH_SHORT).show();
             }
         });
-
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override

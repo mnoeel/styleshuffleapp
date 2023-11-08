@@ -12,7 +12,6 @@ import com.example.styleshuffle.R;
 public class UserViewHolder extends RecyclerView.ViewHolder {
 
     public ImageView imageView;
-
     public UserViewHolder(@NonNull View itemView) {
         super(itemView);
         imageView = itemView.findViewById(R.id.itemImage);
