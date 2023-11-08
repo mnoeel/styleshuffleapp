@@ -1,5 +1,6 @@
 package com.example.styleshuffle.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.example.styleshuffle.DataModel.TopItemDAO;
 import com.example.styleshuffle.DataModel.UserDatabase;
 import com.example.styleshuffle.R;
 import com.example.styleshuffle.Recycler.BottomUserRecycler;
+import com.example.styleshuffle.SavedOutfitsActivity;
 
 import java.util.List;
 
@@ -30,16 +32,20 @@ public class ClosetFragment extends Fragment {
     TopItemDAO topItemDAO;
     ShoeItemDAO shoeItemDAO;
     private List<BottomItem> items;
+    Button startOutfitsActivityBtn, buttonBottoms;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_closet, container, false);
-        Button buttonBottoms = view.findViewById(R.id.buttonBottoms);
+        buttonBottoms = view.findViewById(R.id.buttonBottoms);
         bottomRecyclerView = view.findViewById(R.id.horGridView);
         bottomItemDAO = UserDatabase.getDBInstance(requireContext()).bottomItemDAO();
         BottomUserRecycler bottomUserRecycler = new BottomUserRecycler(bottomItemDAO.getAllBottomItems());
         bottomRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         bottomRecyclerView.setAdapter(bottomUserRecycler);
+
+        startOutfitsActivityBtn = view.findViewById(R.id.outfitsActivityBtn);
+
         buttonBottoms.setOnClickListener(v -> {
             if (isGridViewVisible) {
                 bottomRecyclerView.setVisibility(View.GONE);
@@ -49,6 +55,11 @@ public class ClosetFragment extends Fragment {
                 isGridViewVisible = true;
 
             }
+        });
+
+        startOutfitsActivityBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SavedOutfitsActivity.class);
+            startActivity(intent);
         });
         return view;
 

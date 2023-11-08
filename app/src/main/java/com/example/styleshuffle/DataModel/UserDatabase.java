@@ -12,7 +12,7 @@ import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(
-        entities = {BottomItem.class,TopItem.class,ShoeItem.class},
+        entities = {BottomItem.class,TopItem.class,ShoeItem.class,Outfit.class},
         version = 1,
         exportSchema = false
 )
@@ -22,6 +22,8 @@ public abstract class UserDatabase extends RoomDatabase {
         public abstract TopItemDAO topItemDAO();
         public abstract BottomItemDAO bottomItemDAO();
         public abstract ShoeItemDAO shoeItemDAO();
+        public abstract OutfitDAO outfitDAO();
+
 
         public static synchronized UserDatabase getDBInstance(Context context) {
             if(userDB == null) {

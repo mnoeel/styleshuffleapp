@@ -6,7 +6,6 @@
         android:name="android.hardware.camera2"
         android:required="true" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,6 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Styleshuffle"
         tools:targetApi="31">
+        <activity
+            android:name=".SavedOutfitsActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
         <activity
             android:name=".ForgotPassword"
             android:exported="false" />
