@@ -194,32 +194,24 @@ public class ShuffleFragment extends Fragment {
         shuffleImagesWithFilters(shoeItems,shoesImage,selectedColors,selectedSeasons);
     }
 
-    public void shuffleImagesWithFilters(List<? extends Item>items, ImageView imageView, List<String> selectedColors, List<String> selectedSeasons) {
+    public void shuffleImagesWithFilters(List<? extends Item> items, ImageView imageView, List<String> selectedColors, List<String> selectedSeasons) {
         List<Item> eligibleItems = new ArrayList<>();
 
-        //no clothing items
-        if (items.isEmpty()) {
-            Toast.makeText(
-                    requireContext(),
-                    "No items available",
-                    Toast.LENGTH_SHORT
-            ).show();
-            return;
-        }
-
-
-            for (Item item : items) {
+        for (Item item : items) {
             String itemColor = item.getColorOfItem();
             String itemSeason = item.getSeasonOfItem();
+
+            // Check if the item matches the selected colors (if any)
             boolean colorMatch = selectedColors.isEmpty() || selectedColors.contains(itemColor);
+
+            // Check if the item matches the selected seasons (if any)
             boolean seasonMatch = selectedSeasons.isEmpty() || selectedSeasons.contains(itemSeason);
+
             if (colorMatch && seasonMatch) {
                 eligibleItems.add(item);
-                }
             }
+        }
 
-
-        //no matching items
         if (!eligibleItems.isEmpty()) {
             Random random = new Random();
             int randomIndex = random.nextInt(eligibleItems.size());
@@ -228,14 +220,23 @@ public class ShuffleFragment extends Fragment {
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
             imageView.setImageBitmap(bitmap);
         } else {
-            Toast.makeText(
-                    requireContext(),
-                    "No matching items found",
-                    Toast.LENGTH_SHORT
-            ).show();
+            // If there are no preferences or no matching items, shuffle from all items
+            if (items.isEmpty()) {
+                Toast.makeText(
+                        requireContext(),
+                        "No items available",
+                        Toast.LENGTH_SHORT
+                ).show();
+            } else {
+                Random random = new Random();
+                int randomIndex = random.nextInt(items.size());
+                Item shuffledItem = items.get(randomIndex);
+                byte[] imageBytes = shuffledItem.getImage();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                imageView.setImageBitmap(bitmap);
+            }
         }
     }
-
 
 
     @Override
