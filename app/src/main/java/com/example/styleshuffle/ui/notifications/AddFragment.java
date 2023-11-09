@@ -151,6 +151,7 @@ public class AddFragment extends Fragment {
         colorAutoCompleteTextView.setText("");
         seasonAutoCompleteTextView.setText("");
         clothesAutoCompleteTextView.setText("");
+        imageView.setVisibility(View.GONE);
         if (TextUtils.isEmpty(selectedColor)
                 || TextUtils.isEmpty(selectedSeason)
                 || TextUtils.isEmpty(selectedCategory)
