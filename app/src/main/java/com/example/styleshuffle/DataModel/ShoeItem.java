@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 import androidx.room.Entity;
 
 @Entity(tableName = "ShoeItems")
-public class ShoeItem {
+public class ShoeItem implements Item{
     @PrimaryKey(autoGenerate = true)
     int uid;
     @ColumnInfo(name = "Color")

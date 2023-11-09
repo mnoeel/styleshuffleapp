@@ -12,7 +12,7 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface TopItemDAO {
+public interface TopItemDAO extends ItemDAO<TopItem>{
     @Query("Select  * from TopItems")
     List<TopItem> getAllTopItems();
 

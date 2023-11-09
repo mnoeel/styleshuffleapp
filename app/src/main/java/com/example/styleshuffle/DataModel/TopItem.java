@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "TopItems")
-public class TopItem {
+public class TopItem implements Item{
         @PrimaryKey(autoGenerate = true)
         int uid;
         @ColumnInfo(name = "Color")

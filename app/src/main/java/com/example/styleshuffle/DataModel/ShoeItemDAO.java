@@ -11,7 +11,7 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface ShoeItemDAO {
+public interface ShoeItemDAO extends ItemDAO<ShoeItem>{
     @Query("Select  * from ShoeItems")
     List<ShoeItem> getAllShoeItems();
 

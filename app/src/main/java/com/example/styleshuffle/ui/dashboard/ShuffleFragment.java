@@ -1,22 +1,30 @@
 package com.example.styleshuffle.ui.dashboard;
-
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.MultiAutoCompleteTextView;
+import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.styleshuffle.DataModel.BottomItem;
 import com.example.styleshuffle.DataModel.BottomItemDAO;
+import com.example.styleshuffle.DataModel.Item;
 import com.example.styleshuffle.DataModel.Outfit;
 import com.example.styleshuffle.DataModel.OutfitDAO;
 import com.example.styleshuffle.DataModel.ShoeItem;
@@ -27,13 +35,16 @@ import com.example.styleshuffle.DataModel.UserDataConverter;
 import com.example.styleshuffle.DataModel.UserDatabase;
 import com.example.styleshuffle.R;
 import com.example.styleshuffle.databinding.FragmentShuffleBinding;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class ShuffleFragment extends Fragment {
     FragmentShuffleBinding binding;
     ImageView bottomsImage,topsImage,shoesImage;
-    Button shuffleBottomsBtn,shuffleTopsBtn,shuffleShoesBtn,shuffleOutfitBtn,saveOutfitBtn;
+    ImageButton shuffleBottomsBtn,shuffleTopsBtn,shuffleShoesBtn;
+    Button shuffleOutfitBtn,saveOutfitBtn;
     View view;
     BottomItemDAO bottomItemDAO;
     TopItemDAO topItemDAO;
@@ -42,10 +53,49 @@ public class ShuffleFragment extends Fragment {
     Drawable topDrawable, bottomDrawable, shoeDrawable;
     Bitmap topBitmap,bottomBitmap, shoeBitmap;
 
+    String[] listColor = {"Red", "Orange", "Yellow", "Green", "Blue", "Pink", "Purple", "White", "Black", "Brown", "Gray", "Multicolor"};
+    String[] listSeason = {"Winter", "Spring", "Summer", "Fall"};
+
+    MultiAutoCompleteTextView topColor,topSeason,bottomColor,bottomSeason,shoeColor,shoeSeason;
+    ArrayAdapter<String> colorAdapter,seasonAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_shuffle, container, false);
+
+
+        colorAdapter = new ArrayAdapter<String>(requireContext(), R.layout.color_list, listColor);
+        seasonAdapter = new ArrayAdapter<String>(requireContext(), R.layout.color_list, listSeason);
+
+        // Top Color Dropdown
+        topColor = view.findViewById(R.id.topColorTV); //add id
+        topColor.setAdapter(colorAdapter);
+        topColor.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());  // Use comma as the separator
+
+        // Top Season Dropdown
+        topSeason = view.findViewById(R.id.topSeasonTV); //ADD ID
+        topSeason.setAdapter(seasonAdapter);
+        topSeason.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+
+        // Bottom Color Dropdown
+        bottomColor = view.findViewById(R.id.bottomColorTV); //add id
+        bottomColor.setAdapter(colorAdapter);
+        bottomColor.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());  // Use comma as the separator
+
+        // Bottom Season Dropdown
+        bottomSeason = view.findViewById(R.id.bottomSeasonTV); //ADD ID
+        bottomSeason.setAdapter(seasonAdapter);
+        bottomSeason.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+
+        // Shoe Color Dropdown
+        shoeColor = view.findViewById(R.id.shoeColorTV); //add id
+        shoeColor.setAdapter(colorAdapter);
+        shoeColor.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());  // Use comma as the separator
+
+        // Shoe Season Dropdown
+        shoeSeason = view.findViewById(R.id.shoeSeasonTV); //ADD ID
+        shoeSeason.setAdapter(seasonAdapter);
+        shoeSeason.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
         //images
         bottomsImage = view.findViewById(R.id.bottomsImage);
@@ -64,7 +114,6 @@ public class ShuffleFragment extends Fragment {
 
         //save outfit button listener
         saveOutfitBtn.setOnClickListener(v-> {
-
             //convert images to bitmaps
             topDrawable = topsImage.getDrawable();
             topBitmap = ((BitmapDrawable) topDrawable).getBitmap();
@@ -74,8 +123,8 @@ public class ShuffleFragment extends Fragment {
 
             shoeDrawable = shoesImage.getDrawable();
             shoeBitmap = ((BitmapDrawable) shoeDrawable).getBitmap();
-            Outfit outfit = new Outfit();
 
+            Outfit outfit = new Outfit();
             outfit.setTopImage(UserDataConverter.convertImage2ByteArray(topBitmap));
             outfit.setBottomImage(UserDataConverter.convertImage2ByteArray(bottomBitmap));
             outfit.setShoeImage(UserDataConverter.convertImage2ByteArray(shoeBitmap));
@@ -84,72 +133,111 @@ public class ShuffleFragment extends Fragment {
 
         //shuffle button listeners
         shuffleTopsBtn.setOnClickListener(v -> {
-            shuffleTops();
+            shuffleTopsButton();
         });
         shuffleBottomsBtn.setOnClickListener(v -> {
-            shuffleBottoms();
+            shuffleBottomsButton();
         });
         shuffleShoesBtn.setOnClickListener(v -> {
-            shuffleShoes();
+            shuffleShoesButton();
         });
         shuffleOutfitBtn.setOnClickListener(v -> {
-            shuffleTops();
-            shuffleBottoms();;
-            shuffleShoes();
+            shuffleTopsButton();
+            shuffleBottomsButton();;
+            shuffleShoesButton();
         });
         return view;
     }
-    public void shuffleTops() {
+
+    public void shuffleTopsButton() {
+        String selectedColors = topColor.getText().toString();
+        List<String> selectedColorList = Arrays.asList(selectedColors.split(", "));
+        String selectedSeasons = topSeason.getText().toString();
+        List<String> selectedSeasonList = Arrays.asList(selectedSeasons.split(", "));
+        Log.d("ShuffleFragment", "Selected Colors: " + selectedColors);
+        Log.d("ShuffleFragment", "Selected Seasons: " + selectedSeasons);
+        shuffleTops(selectedColorList,selectedSeasonList);
+    }
+    public void shuffleBottomsButton() {
+        String selectedColors = bottomColor.getText().toString();
+        List<String> selectedColorList = Arrays.asList(selectedColors.split(", "));
+        String selectedSeasons = bottomSeason.getText().toString();
+        List<String> selectedSeasonList = Arrays.asList(selectedSeasons.split(", "));
+        Log.d("ShuffleFragment", "Selected Colors: " + selectedColors);
+        Log.d("ShuffleFragment", "Selected Seasons: " + selectedSeasons);
+        shuffleBottoms(selectedColorList,selectedSeasonList);
+    }
+
+    public void shuffleShoesButton() {
+        String selectedColors = shoeColor.getText().toString();
+        List<String> selectedColorList = Arrays.asList(selectedColors.split(", "));
+        String selectedSeasons = shoeSeason.getText().toString();
+        List<String> selectedSeasonList = Arrays.asList(selectedSeasons.split(", "));
+        Log.d("ShuffleFragment", "Selected Colors: " + selectedColors);
+        Log.d("ShuffleFragment", "Selected Seasons: " + selectedSeasons);
+        shuffleShoes(selectedColorList,selectedSeasonList);
+    }
+
+    public void shuffleTops(List<String> selectedColors, List<String> selectedSeasons) {
         topItemDAO = UserDatabase.getDBInstance(requireContext()).topItemDAO();
-        Random random = new Random();
-        int randomIndex = random.nextInt(topItemDAO.getAllTopItems().size());
-        TopItem randomItem = topItemDAO.getAllTopItems().get(randomIndex);
-        if (randomItem != null) {
-            byte[] imageBytes = randomItem.getImage();
-            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-            topsImage.setImageBitmap(bitmap);
-        } else {
-            Toast.makeText(
-                    requireContext(),
-                    "No pictures added",
-                    Toast.LENGTH_SHORT
-            ).show();
-        }
+        List<TopItem> topItems = topItemDAO.getAllTopItems();
+        shuffleImagesWithFilters(topItems,topsImage,selectedColors,selectedSeasons);
     }
-    public void shuffleBottoms() {
+    public void shuffleBottoms(List<String> selectedColors, List<String> selectedSeasons) {
         bottomItemDAO = UserDatabase.getDBInstance(requireContext()).bottomItemDAO();
-        Random random = new Random();
-        int randomIndex = random.nextInt(bottomItemDAO.getAllBottomItems().size());
-        BottomItem randomItem = bottomItemDAO.getAllBottomItems().get(randomIndex);
-        if (randomItem != null) {
-            byte[] imageBytes = randomItem.getImage();
-            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-            bottomsImage.setImageBitmap(bitmap);
-        } else {
-            Toast.makeText(
-                    requireContext(),
-                    "No bottoms to choose from :(",
-                    Toast.LENGTH_SHORT
-            ).show();
-        }
+        List<BottomItem> bottomItems = bottomItemDAO.getAllBottomItems();
+        shuffleImagesWithFilters(bottomItems,bottomsImage,selectedColors,selectedSeasons);
     }
-    public void shuffleShoes() {
+    public void shuffleShoes(List<String> selectedColors, List<String> selectedSeasons) {
         shoeItemDAO = UserDatabase.getDBInstance(requireContext()).shoeItemDAO();
-        Random random = new Random();
-        int randomIndex = random.nextInt(shoeItemDAO.getAllShoeItems().size());
-        ShoeItem randomItem = shoeItemDAO.getAllShoeItems().get(randomIndex);
-        if (randomItem != null) {
-            byte[] imageBytes = randomItem.getImage();
+        List<ShoeItem> shoeItems = shoeItemDAO.getAllShoeItems();
+        shuffleImagesWithFilters(shoeItems,shoesImage,selectedColors,selectedSeasons);
+    }
+
+    public void shuffleImagesWithFilters(List<? extends Item>items, ImageView imageView, List<String> selectedColors, List<String> selectedSeasons) {
+        List<Item> eligibleItems = new ArrayList<>();
+
+        //no clothing items
+        if (items.isEmpty()) {
+            Toast.makeText(
+                    requireContext(),
+                    "No items available",
+                    Toast.LENGTH_SHORT
+            ).show();
+            return;
+        }
+
+
+            for (Item item : items) {
+            String itemColor = item.getColorOfItem();
+            String itemSeason = item.getSeasonOfItem();
+            boolean colorMatch = selectedColors.isEmpty() || selectedColors.contains(itemColor);
+            boolean seasonMatch = selectedSeasons.isEmpty() || selectedSeasons.contains(itemSeason);
+            if (colorMatch && seasonMatch) {
+                eligibleItems.add(item);
+                }
+            }
+
+
+        //no matching items
+        if (!eligibleItems.isEmpty()) {
+            Random random = new Random();
+            int randomIndex = random.nextInt(eligibleItems.size());
+            Item shuffledItem = eligibleItems.get(randomIndex);
+            byte[] imageBytes = shuffledItem.getImage();
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-            shoesImage.setImageBitmap(bitmap);
+            imageView.setImageBitmap(bitmap);
         } else {
             Toast.makeText(
                     requireContext(),
-                    "No shoes to pick from :(",
+                    "No matching items found",
                     Toast.LENGTH_SHORT
             ).show();
         }
     }
+
+
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

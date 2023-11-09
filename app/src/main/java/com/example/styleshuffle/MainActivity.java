@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    private Button btnLogout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,35 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-
-        btnLogout = findViewById(R.id.btnLogout);
-
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View v) {
-
-                logout();
-
-            }
-        });
-
-
         mAuth = FirebaseAuth.getInstance();
 
-        btnLogout = findViewById(R.id.btnLogout);
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View v) {
-
-                logout();
-
-            }
-        });
     }
 
 
@@ -104,11 +78,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void logout() {
 
-        FirebaseAuth.getInstance().signOut();
-
-        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-
-    }
 }
