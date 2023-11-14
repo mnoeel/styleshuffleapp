@@ -6,6 +6,8 @@ import android.content.Intent;
 
 import android.os.Bundle;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.Button;
@@ -77,6 +79,25 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+    public void logout() {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mainmenu, menu); // Inflate the custom menu resource
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                logout();
+                return true;
+            // can add more cases if u want more in menu bar
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

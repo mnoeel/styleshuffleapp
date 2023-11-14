@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.ShuffleFragment">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="211dp"
         android:layout_height="133dp"
@@ -16,32 +17,37 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024">
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/topColor"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/selectC"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/topSeason"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
             <MultiAutoCompleteTextView
                 android:id="@+id/topColorTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="84dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:hint="@string/selectC"
                 android:inputType="none"
                 app:layout_constraintBottom_toTopOf="@+id/topSeasonTV"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:focusable="false"
-                android:focusableInTouchMode="false" />
+                tools:ignore="SpeakableTextPresentCheck" />
+
 
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/topSeason"
@@ -49,32 +55,33 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/selectS"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/topColor">
+
 
             <MultiAutoCompleteTextView
                 android:id="@+id/topSeasonTV"
                 android:layout_width="match_parent"
                 android:layout_height="53dp"
                 android:layout_marginTop="44dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:hint="@string/selectS"
                 android:inputType="none"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/topColorTV"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:focusable="false"
-                android:focusableInTouchMode="false"/>
+                tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintGuide_percent="0.5" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -87,32 +94,37 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.369">
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/bottomColor"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/selectC"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/bottomSeason"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
             <MultiAutoCompleteTextView
                 android:id="@+id/bottomColorTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="84dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:hint="@string/selectC"
                 android:inputType="none"
                 app:layout_constraintBottom_toTopOf="@+id/bottomSeasonTV"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:focusable="false"
-                android:focusableInTouchMode="false"/>
+                tools:ignore="SpeakableTextPresentCheck" />
+
 
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/bottomSeason"
@@ -120,32 +132,32 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/selectS"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bottomColor">
+
 
             <MultiAutoCompleteTextView
                 android:id="@+id/bottomSeasonTV"
                 android:layout_width="match_parent"
                 android:layout_height="53dp"
                 android:layout_marginTop="44dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:hint="@string/selectS"
                 android:inputType="none"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bottomColorTV"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:focusable="false"
-                android:focusableInTouchMode="false"/>
+                tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintGuide_percent="0.5" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="211dp"
@@ -157,32 +169,37 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.71">
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/shoeColor"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/selectC"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/shoeSeason"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
             <MultiAutoCompleteTextView
                 android:id="@+id/shoeColorTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="84dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:hint="@string/selectC"
                 android:inputType="none"
                 app:layout_constraintBottom_toTopOf="@+id/shoeSeasonTV"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:focusable="false"
-                android:focusableInTouchMode="false"/>
+                tools:ignore="SpeakableTextPresentCheck" />
+
 
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/shoeSeason"
@@ -190,32 +207,32 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/selectS"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shoeColor">
+
 
             <MultiAutoCompleteTextView
                 android:id="@+id/shoeSeasonTV"
                 android:layout_width="match_parent"
                 android:layout_height="53dp"
                 android:layout_marginTop="44dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:hint="@string/selectS"
                 android:inputType="none"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/shoeColorTV"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:focusable="false"
-                android:focusableInTouchMode="false"/>
+                tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintGuide_percent="0.5" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <ImageView
         android:id="@+id/bottomsImage"
@@ -227,6 +244,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.391" />
+
 
     <ImageButton
         android:id="@+id/shuffleBottomsBtn"
@@ -243,6 +261,7 @@
         app:layout_constraintVertical_bias="0.528"
         tools:ignore="SpeakableTextPresentCheck" />
 
+
     <ImageButton
         android:id="@+id/shuffleShirtsButton"
         android:layout_width="65dp"
@@ -252,11 +271,12 @@
         android:src="@drawable/shuffle_icon_sign_symbol_design_free_png"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.812"
+        app:layout_constraintHorizontal_bias="0.78"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.224"
+        app:layout_constraintVertical_bias="0.221"
         tools:ignore="SpeakableTextPresentCheck" />
+
 
     <ImageView
         android:id="@+id/shirtImage"
@@ -268,6 +288,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024" />
+
 
     <ImageButton
         android:id="@+id/shuffleShoesButton"
@@ -284,6 +305,7 @@
         app:layout_constraintVertical_bias="0.825"
         tools:ignore="SpeakableTextPresentCheck" />
 
+
     <ImageView
         android:id="@+id/shoesImage"
         android:layout_width="183dp"
@@ -295,6 +317,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.752" />
 
+
     <Button
         android:id="@+id/shuffleOutfitButton"
         android:layout_width="wrap_content"
@@ -305,7 +328,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.959" />
+        app:layout_constraintVertical_bias="0.896" />
+
 
     <Button
         android:id="@+id/saveButton"
@@ -314,10 +338,25 @@
         android:text="Save Outfit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.959" />
+        app:layout_constraintVertical_bias="0.976" />
+
+
+    <Button
+        android:id="@+id/filterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Filters"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.813"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.932" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

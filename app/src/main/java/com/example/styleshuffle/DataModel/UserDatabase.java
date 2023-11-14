@@ -5,6 +5,7 @@ import static androidx.core.content.ContentProviderCompat.requireContext;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -31,10 +32,18 @@ public abstract class UserDatabase extends RoomDatabase {
                         context.getApplicationContext(),
                         UserDatabase.class,
                         "user19b2"
-                ).allowMainThreadQueries().build();
-            }
-            return userDB;
-        }
+                ).addMigrations(new Migration(1, 2) {
+                    @Override
+                    public void migrate(@NonNull SupportSQLiteDatabase database) {
+                        // Add migration logic here
+                    }
 
+                        //.fallbackToDestructiveMigration().allowMainThreadQueries().build();
+
+            }).allowMainThreadQueries().build();
+
+        } return userDB;
+
+}
 }
 
