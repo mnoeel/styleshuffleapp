@@ -23,5 +23,5 @@ public interface TopItemDAO extends ItemDAO<TopItem>{
     void updateTopItem(TopItem topItem);
 
     @Delete
-    void deleteClosetItem(BottomItem bottomItem);
+    void deleteClosetItem(TopItem topItem);
 }
