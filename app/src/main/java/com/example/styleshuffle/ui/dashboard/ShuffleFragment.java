@@ -7,11 +7,13 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Layout;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +25,16 @@ import android.widget.CheckBox;
 import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListPopupWindow;
+import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
@@ -46,10 +54,12 @@ import com.example.styleshuffle.databinding.FragmentShuffleBinding;
 import com.google.android.material.textfield.TextInputLayout;
 
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -71,7 +81,6 @@ public class ShuffleFragment extends Fragment {
     boolean filtersAdded=false;
     String[] listColor = {"Red", "Orange", "Yellow", "Green", "Blue", "Pink", "Purple", "White", "Black", "Brown", "Gray", "Multicolor"};
     String[] listSeason = {"Winter", "Spring", "Summer", "Fall"};
-
 
     MultiAutoCompleteTextView topColor,topSeason,bottomColor,bottomSeason,shoeColor,shoeSeason;
     ArrayAdapter<String> colorAdapter,seasonAdapter;
@@ -167,16 +176,20 @@ public class ShuffleFragment extends Fragment {
         saveOutfitBtn.setOnClickListener(v-> {
             //convert images to bitmaps
             topDrawable = topsImage.getDrawable();
-            topBitmap = ((BitmapDrawable) topDrawable).getBitmap();
-
-
             bottomDrawable = bottomsImage.getDrawable();
-            bottomBitmap = ((BitmapDrawable) bottomDrawable).getBitmap();
-
-
             shoeDrawable = shoesImage.getDrawable();
-            shoeBitmap = ((BitmapDrawable) shoeDrawable).getBitmap();
 
+            if (topDrawable == null || bottomDrawable == null || shoeDrawable == null) {
+                // Check if any of the images is missing
+                Toast.makeText(
+                        requireContext(),
+                        "Not a complete outfit :(",
+                        Toast.LENGTH_SHORT
+                ).show();
+            } else {
+                topBitmap = ((BitmapDrawable) topDrawable).getBitmap();
+                bottomBitmap = ((BitmapDrawable) bottomDrawable).getBitmap();
+                shoeBitmap = ((BitmapDrawable) shoeDrawable).getBitmap();
 
             Outfit outfit = new Outfit();
             outfit.setTopImage(UserDataConverter.convertImage2ByteArray(topBitmap));
@@ -189,7 +202,7 @@ public class ShuffleFragment extends Fragment {
                     "Cute Outfit!",
                     Toast.LENGTH_SHORT
             ).show();
-        });
+        }});
 
 
         //shuffle button listeners
@@ -217,6 +230,8 @@ public class ShuffleFragment extends Fragment {
         return view;
     }
 
+
+
     public void showFilters() {
         topColorTIL.setVisibility(View.VISIBLE);
         topSeasonTIL.setVisibility(View.VISIBLE);
@@ -233,6 +248,7 @@ public class ShuffleFragment extends Fragment {
         shoeColorTIL.setVisibility(View.GONE);
         shoeSeasonTIL.setVisibility(View.GONE);
     }
+
     public void moveButton(String direction) {
         ViewGroup.MarginLayoutParams topBtnParams = (ViewGroup.MarginLayoutParams) shuffleTopsBtn.getLayoutParams();
         ViewGroup.MarginLayoutParams bottomBtnParams = (ViewGroup.MarginLayoutParams) shuffleBottomsBtn.getLayoutParams();
@@ -257,6 +273,7 @@ public class ShuffleFragment extends Fragment {
         shuffleShoesBtn.setLayoutParams(shoesBtnParams);
         shuffleOutfitBtn.setLayoutParams(newoutfitBtnParams);
     }
+
     private void setTextViewClickListener(int textViewId, Set<String> selectedPreferences) {
         MultiAutoCompleteTextView textView = view.findViewById(textViewId);
         textView.setOnItemClickListener((parent, view, position, id) -> {
@@ -279,6 +296,7 @@ public class ShuffleFragment extends Fragment {
             }
         });
     }
+
 
 
     private void updateSelectedPreferenceTextView(MultiAutoCompleteTextView textView, Set<String> selectedPreferences) {
@@ -375,12 +393,11 @@ public class ShuffleFragment extends Fragment {
             byte[] imageBytes = shuffledItem.getImage();
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
             imageView.setImageBitmap(bitmap);
-        } else if(eligibleItems.isEmpty()){
-
-
+        } else{
+            imageView.setImageDrawable(null);
             Toast.makeText(
                     requireContext(),
-                    "No items available",
+                    "Not enough items",
                     Toast.LENGTH_SHORT
             ).show(); }
     }
@@ -391,13 +408,6 @@ public class ShuffleFragment extends Fragment {
         topSeason.setText("");
         bottomSeason.setText("");
         shoeSeason.setText("");
-    }
-
-
-    public void clearImages(ImageView top, ImageView bottom, ImageView shoe) {
-        top.setImageDrawable(null);
-        bottom.setImageDrawable(null);
-        shoe.setImageDrawable(null);
     }
 
 
