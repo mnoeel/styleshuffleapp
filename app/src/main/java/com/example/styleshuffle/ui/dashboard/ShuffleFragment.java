@@ -176,9 +176,6 @@ public class ShuffleFragment extends Fragment {
 
             shoeDrawable = shoesImage.getDrawable();
             shoeBitmap = ((BitmapDrawable) shoeDrawable).getBitmap();
-            Log.d("ShuffleFragment", "Before Clear - Top Color: " + topColor.getText().toString());
-            clearFilters();
-            Log.d("ShuffleFragment", "After Clear - Top Color: " + topColor.getText().toString());
 
 
             Outfit outfit = new Outfit();
@@ -186,6 +183,12 @@ public class ShuffleFragment extends Fragment {
             outfit.setBottomImage(UserDataConverter.convertImage2ByteArray(bottomBitmap));
             outfit.setShoeImage(UserDataConverter.convertImage2ByteArray(shoeBitmap));
             outfitDAO.insertOutfit(outfit);
+
+            Toast.makeText(
+                    requireContext(),
+                    "Cute Outfit!",
+                    Toast.LENGTH_SHORT
+            ).show();
         });
 
 

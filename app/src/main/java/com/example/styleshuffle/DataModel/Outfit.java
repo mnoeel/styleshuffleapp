@@ -46,7 +46,9 @@ public class Outfit {
         this.shoeImage = shoeImage;
     }
 
-
+    public byte[] getAllImages() {
+        return bottomImage;
+    }
 
 
 

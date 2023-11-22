@@ -77,6 +77,7 @@ public class ClosetFragment extends Fragment {
         buttonBottoms = view.findViewById(R.id.buttonBottoms);
         bottomRecyclerView = view.findViewById(R.id.bottomGridView);
         bottomItemDAO = UserDatabase.getDBInstance(requireContext()).bottomItemDAO();
+        //yas
         BottomUserRecycler bottomUserRecycler = new BottomUserRecycler(requireContext(), bottomItemDAO.getAllBottomItems(), bottomItemDAO);
         bottomRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         bottomRecyclerView.setAdapter(bottomUserRecycler);

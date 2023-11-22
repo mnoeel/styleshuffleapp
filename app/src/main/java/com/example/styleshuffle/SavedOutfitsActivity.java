@@ -27,7 +27,7 @@ public class SavedOutfitsActivity extends AppCompatActivity {
         List<Outfit> outfits = outfitDao.getAllOutfits();
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        OutfitAdapter adapter = new OutfitAdapter(outfits);
+        OutfitAdapter adapter = new OutfitAdapter(this,outfits,outfitDao);
         recyclerView.setAdapter(adapter);
     }
 }
