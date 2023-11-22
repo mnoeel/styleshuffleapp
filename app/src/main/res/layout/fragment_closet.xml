@@ -12,8 +12,11 @@
         android:padding="40dp"
         tools:context=".ui.home.ClosetFragment">
 
-        <Button
+
+
+        <ImageButton
             android:id="@+id/buttonTops"
+            android:background="@drawable/topicon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -26,8 +29,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonBottoms"
+            android:background="@drawable/bottomsicon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -40,8 +44,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/topGridView" />
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonShoes"
+            android:background="@drawable/shoeicon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
