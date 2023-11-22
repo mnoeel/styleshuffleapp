@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +42,7 @@ public class AddFragment extends Fragment {
 
     private FragmentAddBinding binding;
     private static final int pic_id = 123;
-    Button camera_open_id;
+    ImageButton camera_open_id;
     ImageView imageView;
     Bitmap bmpImage;
     TopItemDAO topItemDAO;
@@ -54,10 +55,9 @@ public class AddFragment extends Fragment {
     String[] listSeason = {"Winter", "Spring", "Summer", "Fall"};
     String[] listClothes = {"Tops", "Bottoms", "Shoes"};
 
-    AutoCompleteTextView colorAutoCompleteTextView,seasonAutoCompleteTextView,clothesAutoCompleteTextView;
+    AutoCompleteTextView colorAutoCompleteTextView, seasonAutoCompleteTextView, clothesAutoCompleteTextView;
 
-    ArrayAdapter<String> colorAdapter,seasonAdapter,clothesAdapter;
-
+    ArrayAdapter<String> colorAdapter, seasonAdapter, clothesAdapter;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -182,7 +182,7 @@ public class AddFragment extends Fragment {
                     shoeItemDAO.insertShoeItem(shoeItem);
                     break;
                 default:
-                    Toast.makeText(requireContext(), "Unknown Category",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Unknown Category", Toast.LENGTH_SHORT).show();
                     break;
 
             }

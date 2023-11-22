@@ -1,119 +1,143 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/closetfragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="30dp"
-    tools:context=".ui.home.ClosetFragment">
+    android:paddingBottom="30dp">
 
-
-    <Button
-        android:id="@+id/buttonTops"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Show Tops"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/topGridView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonBottoms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Show Bottoms"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/bottomGridView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topGridView" />
-
-    <Button
-        android:id="@+id/buttonShoes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Show Shoes"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottomGridView" />
-
-    <Button
-        android:id="@+id/outfitsActivityBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Saved Outfits"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.107"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.049" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/topGridView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/buttonBottoms"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonTops" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/bottomGridView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/buttonShoes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBottoms" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/shoeGridView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonShoes" />
-
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/closetDoor"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:src="@drawable/whiteclosetdoor" />
+        android:layout_height="wrap_content"
+        android:padding="40dp"
+        tools:context=".ui.home.ClosetFragment">
 
         <Button
-            android:id="@+id/closetButton"
+            android:id="@+id/buttonTops"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="click"
-            android:background="@android:color/transparent"
-            android:textColor="@android:color/transparent"
-            android:layout_marginTop="375dp"
-            android:layout_marginLeft="156dp"/>
-    </RelativeLayout>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="110dp"
+            android:layout_marginBottom="30dp"
+            android:text="Tops"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/topGridView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/buttonBottoms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="30dp"
+            android:text="Bottoms"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/bottomGridView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topGridView" />
 
+        <Button
+            android:id="@+id/buttonShoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="30dp"
+            android:text="Shoes"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/shoeGridView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bottomGridView" />
+
+        <Button
+            android:id="@+id/outfitsActivityBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saved Outfits"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.107"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.049" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/topGridView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/buttonBottoms"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonTops" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bottomGridView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/buttonShoes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonBottoms" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/shoeGridView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonShoes" />
+
+        <ImageView
+            android:id="@+id/questionbtn"
+            android:layout_width="83dp"
+            android:layout_height="94dp"
+            android:layout_marginBottom="588dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.981"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/img" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/closetDoor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/whiteclosetdoor" />
+
+            <Button
+                android:id="@+id/closetButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="156dp"
+                android:layout_marginTop="375dp"
+                android:background="@android:color/transparent"
+                android:text="click"
+                android:textColor="@android:color/transparent" />
+        </FrameLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

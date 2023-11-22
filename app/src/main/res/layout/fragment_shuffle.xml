@@ -8,14 +8,15 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="211dp"
-        android:layout_height="133dp"
+        android:id="@+id/constraintTops"
+        android:layout_width="190dp"
+        android:layout_height="170dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.986"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024">
+        app:layout_constraintVertical_bias="0.167">
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -25,24 +26,21 @@
             android:layout_height="wrap_content"
             android:hint="@string/selectC"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/topSeason"
+            app:layout_constraintBottom_toTopOf="@+id/shuffleShirtsButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@id/constraintTops">
 
 
             <MultiAutoCompleteTextView
                 android:id="@+id/topColorTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="84dp"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:hint="@string/selectC"
                 android:inputType="none"
                 app:layout_constraintBottom_toTopOf="@+id/topSeasonTV"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck" />
 
 
@@ -56,43 +54,52 @@
             android:layout_height="wrap_content"
             android:hint="@string/selectS"
             android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/topColor">
+            app:layout_constraintTop_toBottomOf="@+id/shuffleShirtsButton">
 
 
             <MultiAutoCompleteTextView
                 android:id="@+id/topSeasonTV"
                 android:layout_width="match_parent"
-                android:layout_height="53dp"
-                android:layout_marginTop="44dp"
+                android:layout_height="wrap_content"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:hint="@string/selectS"
                 android:inputType="none"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/topColorTV"
+                app:layout_constraintTop_toBottomOf="@+id/shuffleShirtsButton"
                 tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
+        <ImageButton
+            android:id="@+id/shuffleShirtsButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/shuffle_icon_sign_symbol_design_free_png"
+            android:backgroundTint="#6200ee"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.503"
+            tools:ignore="SpeakableTextPresentCheck" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="211dp"
-        android:layout_height="133dp"
+        android:id="@+id/constraintBottoms"
+        android:layout_width="190dp"
+        android:layout_height="170dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.985"
+        app:layout_constraintHorizontal_bias="0.986"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.369">
+        app:layout_constraintVertical_bias="0.502">
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -102,7 +109,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/selectC"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/bottomSeason"
+            app:layout_constraintBottom_toTopOf="@+id/shuffleBottomsBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +143,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bottomColor">
+            app:layout_constraintTop_toBottomOf="@+id/shuffleBottomsBtn">
 
 
             <MultiAutoCompleteTextView
@@ -153,21 +160,33 @@
                 tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
+        <ImageButton
+            android:id="@+id/shuffleBottomsBtn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/shuffle_icon_sign_symbol_design_free_png"
+            android:backgroundTint="#6200ee"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="211dp"
-        android:layout_height="133dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/constraintShoes"
+        android:layout_width="190dp"
+        android:layout_height="170dp"
+        app:layout_constraintBottom_toTopOf="@+id/filterButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.986"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.71">
+        app:layout_constraintVertical_bias="0.967">
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -177,12 +196,11 @@
             android:layout_height="wrap_content"
             android:hint="@string/selectC"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/shoeSeason"
+            app:layout_constraintBottom_toTopOf="@+id/shuffleShoesButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
 
             <MultiAutoCompleteTextView
                 android:id="@+id/shoeColorTV"
@@ -211,13 +229,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shoeColor">
+            app:layout_constraintTop_toBottomOf="@+id/shuffleShoesButton">
 
 
             <MultiAutoCompleteTextView
                 android:id="@+id/shoeSeasonTV"
                 android:layout_width="match_parent"
-                android:layout_height="53dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -229,106 +247,69 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-
+        <ImageButton
+            android:id="@+id/shuffleShoesButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/shuffle_icon_sign_symbol_design_free_png"
+            android:backgroundTint="#6200ee"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <ImageView
+        android:id="@+id/shirtImage"
+        android:layout_width="190dp"
+        android:layout_height="166dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomsImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shuffleOutfitButton"
+        app:layout_constraintVertical_bias="0.143" />
 
     <ImageView
         android:id="@+id/bottomsImage"
-        android:layout_width="183dp"
+        android:layout_width="190dp"
         android:layout_height="166dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/shoesImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.391" />
-
-
-    <ImageButton
-        android:id="@+id/shuffleBottomsBtn"
-        android:layout_width="65dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#6200ee"
-        android:scaleType="fitCenter"
-        android:src="@drawable/shuffle_icon_sign_symbol_design_free_png"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.799"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.528"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-
-    <ImageButton
-        android:id="@+id/shuffleShirtsButton"
-        android:layout_width="65dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#6200ee"
-        android:scaleType="fitCenter"
-        android:src="@drawable/shuffle_icon_sign_symbol_design_free_png"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.78"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.221"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-
-    <ImageView
-        android:id="@+id/shirtImage"
-        android:layout_width="183dp"
-        android:layout_height="166dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024" />
-
-
-    <ImageButton
-        android:id="@+id/shuffleShoesButton"
-        android:layout_width="65dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#6200ee"
-        android:scaleType="fitCenter"
-        android:src="@drawable/shuffle_icon_sign_symbol_design_free_png"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.804"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.825"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintTop_toBottomOf="@id/shirtImage"
+        app:layout_constraintVertical_bias="1.0" />
 
 
     <ImageView
         android:id="@+id/shoesImage"
-        android:layout_width="183dp"
+        android:layout_width="190dp"
         android:layout_height="166dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/saveButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintHorizontal_bias="0.072"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.752" />
-
+        app:layout_constraintTop_toBottomOf="@id/bottomsImage"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/shuffleOutfitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pick an Outfit for Me!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"
+        android:text="New Outfit!"
+        app:layout_constraintBottom_toTopOf="@id/shirtImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.896" />
+        app:layout_constraintVertical_bias="0.484" />
 
 
     <Button
@@ -338,11 +319,10 @@
         android:text="Save Outfit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.142"
+        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
-
+        app:layout_constraintVertical_bias="0.966" />
 
     <Button
         android:id="@+id/filterButton"
@@ -351,12 +331,10 @@
         android:text="Add Filters"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.813"
+        app:layout_constraintHorizontal_bias="0.879"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.932" />
-
-
+        app:layout_constraintVertical_bias="0.966" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

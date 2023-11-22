@@ -1,5 +1,6 @@
 package com.example.styleshuffle.ui.home;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -41,6 +42,7 @@ public class ClosetFragment extends Fragment {
     private List<ShoeItem> shoeItems;
 
     Button startOutfitsActivityBtn, buttonBottoms, buttonTops, buttonShoes, closetButton;
+    ImageView questionbtn;
     ImageView closetDoor;
 
 
@@ -48,7 +50,6 @@ public class ClosetFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_closet, container, false);
 
-        //closet door and button
         closetDoor = view.findViewById(R.id.closetDoor);
         closetButton = view.findViewById(R.id.closetButton);
 
@@ -59,8 +60,8 @@ public class ClosetFragment extends Fragment {
             buttonTops.setVisibility(View.VISIBLE);
             buttonBottoms.setVisibility(View.VISIBLE);
             buttonShoes.setVisibility(View.VISIBLE);
+            questionbtn.setVisibility(View.VISIBLE);
         });
-
 
         //tops
         buttonTops = view.findViewById(R.id.buttonTops);
@@ -84,7 +85,7 @@ public class ClosetFragment extends Fragment {
         shoeItemDAO = UserDatabase.getDBInstance(requireContext()).shoeItemDAO();
         ShoeUserRecycler shoeUserRecycler = new ShoeUserRecycler(shoeItemDAO.getAllShoeItems());
         shoeRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
-        shoeRecyclerView.setAdapter(bottomUserRecycler);
+        shoeRecyclerView.setAdapter(shoeUserRecycler);
 
 
         startOutfitsActivityBtn = view.findViewById(R.id.outfitsActivityBtn);
@@ -93,14 +94,33 @@ public class ClosetFragment extends Fragment {
         buttonBottoms.setOnClickListener(v -> toggleVisibility(bottomRecyclerView));
         buttonShoes.setOnClickListener(v -> toggleVisibility(shoeRecyclerView));
 
+        questionbtn = view.findViewById(R.id.questionbtn);
+
+        questionbtn.setOnClickListener(v -> {
+            // Create and configure the custom dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+            builder.setTitle("FAQ");
+            builder.setMessage("How to delete an closet item?\n - Double tap an image to have it deleted.");
+            // Add an OK button to the dialog
+            builder.setPositiveButton("OK", (dialog, which) -> {
+                // Handle the OK button click if needed
+                dialog.dismiss();
+            });
+
+            // Create and show the dialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        });
 
         startOutfitsActivityBtn.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), SavedOutfitsActivity.class);
             startActivity(intent);
         });
+
         return view;
 
     }
+
 
     private void toggleVisibility(RecyclerView recyclerView) {
         if (isGridViewVisible) {
@@ -111,4 +131,5 @@ public class ClosetFragment extends Fragment {
             isGridViewVisible = true;
         }
     }
+
 }

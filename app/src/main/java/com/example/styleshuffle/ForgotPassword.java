@@ -54,21 +54,19 @@ public class ForgotPassword extends AppCompatActivity {
         });
     }
 
-    private void restPassword(){
+    private void restPassword() {
         String emailAddress = emailEditText.getText().toString().trim();
 
-        if(emailAddress.isEmpty()){
+        if (emailAddress.isEmpty()) {
             Toast.makeText(ForgotPassword.this, "Please input email", Toast.LENGTH_SHORT).show();
-        }
-        else{
+        } else {
             auth.sendPasswordResetEmail(emailAddress)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(ForgotPassword.this, "Email sent" , Toast.LENGTH_SHORT).show();
-                            }
-                            else{
+                                Toast.makeText(ForgotPassword.this, "Email sent", Toast.LENGTH_SHORT).show();
+                            } else {
                                 Toast.makeText(ForgotPassword.this, "Please input email", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -79,3 +77,4 @@ public class ForgotPassword extends AppCompatActivity {
     }
 
 }
+

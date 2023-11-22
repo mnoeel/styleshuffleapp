@@ -29,7 +29,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.292"
+        app:layout_constraintHorizontal_bias="0.346"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -50,13 +50,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Password"
+        android:hint="Password"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/register_email"
         app:layout_constraintVertical_bias="0.013" />
+
+    <ImageView
+        android:id="@+id/viewPass"
+        android:layout_width="39dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_email"
+        app:srcCompat="@drawable/img_4306" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
