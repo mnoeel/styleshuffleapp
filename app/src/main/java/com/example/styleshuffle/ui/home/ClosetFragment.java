@@ -69,7 +69,7 @@ public class ClosetFragment extends Fragment {
         buttonTops = view.findViewById(R.id.buttonTops);
         topRecyclerView = view.findViewById(R.id.topGridView);
         topItemDAO = UserDatabase.getDBInstance(requireContext()).topItemDAO();
-        TopUserRecycler topUserRecycler = new TopUserRecycler(topItemDAO.getAllTopItems());
+        TopUserRecycler topUserRecycler = new TopUserRecycler(requireContext(), topItemDAO.getAllTopItems(), topItemDAO);
         topRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         topRecyclerView.setAdapter(topUserRecycler);
 
@@ -86,7 +86,7 @@ public class ClosetFragment extends Fragment {
         buttonShoes = view.findViewById(R.id.buttonShoes);
         shoeRecyclerView = view.findViewById(R.id.shoeGridView);
         shoeItemDAO = UserDatabase.getDBInstance(requireContext()).shoeItemDAO();
-        ShoeUserRecycler shoeUserRecycler = new ShoeUserRecycler(shoeItemDAO.getAllShoeItems());
+        ShoeUserRecycler shoeUserRecycler = new ShoeUserRecycler(requireContext(), shoeItemDAO.getAllShoeItems(),shoeItemDAO);
         shoeRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         shoeRecyclerView.setAdapter(shoeUserRecycler);
 

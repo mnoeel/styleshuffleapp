@@ -21,7 +21,7 @@ public class BottomUserRecycler extends RecyclerView.Adapter<UserViewHolder> {
     private Context context;
     private List<BottomItem> data;
     private BottomItemDAO bottomItemDAO;
-    private boolean isDeleteMode;
+ //   private boolean isDeleteMode;
 
     private MediaPlayer trashSound;
 
