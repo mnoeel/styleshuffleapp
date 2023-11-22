@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
@@ -41,7 +42,8 @@ public class ClosetFragment extends Fragment {
     private List<TopItem> topItems;
     private List<ShoeItem> shoeItems;
 
-    Button startOutfitsActivityBtn, buttonBottoms, buttonTops, buttonShoes, closetButton;
+    Button startOutfitsActivityBtn, closetButton;
+    ImageButton buttonBottoms, buttonTops, buttonShoes;
     ImageView questionbtn;
     ImageView closetDoor;
 
