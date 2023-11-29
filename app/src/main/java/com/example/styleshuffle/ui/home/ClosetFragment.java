@@ -103,7 +103,7 @@ public class ClosetFragment extends Fragment {
             // Create and configure the custom dialog
             AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
             builder.setTitle("FAQ");
-            builder.setMessage("How to delete an closet item?\n - Double tap an image to have it deleted.");
+            builder.setMessage("How to delete an closet item or outfit?\n - Double tap an image to have it deleted.");
             // Add an OK button to the dialog
             builder.setPositiveButton("OK", (dialog, which) -> {
                 // Handle the OK button click if needed

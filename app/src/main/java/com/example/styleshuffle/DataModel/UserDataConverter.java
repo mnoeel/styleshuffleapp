@@ -7,6 +7,9 @@ import java.io.ByteArrayOutputStream;
 
 public class UserDataConverter {
 
+    public static Bitmap convertByteArray2Bitmap(byte[] byteArray) {
+        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+    }
     public static byte[] convertImage2ByteArray(Bitmap bitmap) {
         if (bitmap != null) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
