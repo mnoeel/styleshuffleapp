@@ -36,6 +36,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 
 import com.example.styleshuffle.DataModel.BottomItem;
@@ -50,6 +51,7 @@ import com.example.styleshuffle.DataModel.TopItemDAO;
 import com.example.styleshuffle.DataModel.UserDataConverter;
 import com.example.styleshuffle.DataModel.UserDatabase;
 import com.example.styleshuffle.R;
+import com.example.styleshuffle.TempFragment;
 import com.example.styleshuffle.databinding.FragmentShuffleBinding;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -67,7 +69,7 @@ import java.util.Set;
 public class ShuffleFragment extends Fragment {
     FragmentShuffleBinding binding;
     ImageView bottomsImage,topsImage,shoesImage;
-    ImageButton shuffleBottomsBtn,shuffleTopsBtn,shuffleShoesBtn;
+    ImageButton shuffleBottomsBtn,shuffleTopsBtn,shuffleShoesBtn, weatherButton;
     Button shuffleOutfitBtn,saveOutfitBtn, showFilters,clearFiltersBtn;
     View view;
     BottomItemDAO bottomItemDAO;
@@ -141,6 +143,7 @@ public class ShuffleFragment extends Fragment {
 
 
         //buttons
+        weatherButton = view.findViewById(R.id.weatherButton);
         shuffleBottomsBtn = view.findViewById(R.id.shuffleBottomsBtn);
         shuffleTopsBtn = view.findViewById(R.id.shuffleShirtsBtn);
         shuffleShoesBtn = view.findViewById(R.id.shuffleShoesButton);
@@ -148,6 +151,21 @@ public class ShuffleFragment extends Fragment {
         saveOutfitBtn = view.findViewById(R.id.saveButton);
         showFilters = view.findViewById(R.id.filterButton);
         clearFiltersBtn=view.findViewById(R.id.clearFilterBtn);
+
+
+        weatherButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // openTempFragment();
+                TempFragment dialogFragment = new TempFragment();
+                dialogFragment.show(getChildFragmentManager(), "TempFragment");
+            }
+
+        });
+            //WeatherDialogFragment dialogFragment = new WeatherDialogFragment();
+            //dialogFragment.show(getChildFragmentManager(), "WeatherDialogFragment");
+
+
 
         //outfit db
         outfitDAO = UserDatabase.getDBInstance(requireContext()).outfitDAO();
@@ -230,6 +248,18 @@ public class ShuffleFragment extends Fragment {
         return view;
     }
 
+    /*private void openTempFragment() {
+        // Create a new instance of YourFragment
+        TempFragment tempFragment = new TempFragment();
+
+        // Begin the transaction
+        getChildFragmentManager().beginTransaction()
+                .replace(R.id.fragmentShuffle, tempFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+*/
 
 
     public void showFilters() {

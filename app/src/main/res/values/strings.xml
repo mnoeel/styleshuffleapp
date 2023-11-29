@@ -16,4 +16,6 @@
     <string name="selectC">Select Color</string>
     <string name="selectS">Select Season</string>
     <string name="selectI">Select Clothing Category</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
