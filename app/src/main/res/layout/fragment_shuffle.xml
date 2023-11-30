@@ -88,6 +88,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck" />
+        <ImageButton
+            android:id="@+id/shuffleShirtsBtn2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:visibility="gone"
+            android:background="@drawable/shuffleicon"
+            android:backgroundTint="#ee1087"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -167,6 +180,19 @@
             android:background="@drawable/shuffleicon"
             android:backgroundTint="#ee1087"
             android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+        <ImageButton
+            android:id="@+id/shuffleBottomsBtn2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/shuffleicon"
+            android:backgroundTint="#ee1087"
+            android:visibility="gone"
+            app:layout_constraintVertical_bias="1.0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -254,6 +280,20 @@
             android:background="@drawable/shuffleicon"
             android:backgroundTint="#ee1087"
             android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/shuffleShoesButton2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/shuffleicon"
+            android:backgroundTint="#ee1087"
+            android:visibility="gone"
+            app:layout_constraintVertical_bias="1.0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -351,13 +391,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CLEAR"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.839"
+        app:layout_constraintHorizontal_bias="0.981"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintVertical_bias="0.04" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

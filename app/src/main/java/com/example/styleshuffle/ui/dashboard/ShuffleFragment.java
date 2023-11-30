@@ -37,6 +37,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -71,7 +73,7 @@ import java.util.Set;
 public class ShuffleFragment extends Fragment {
     FragmentShuffleBinding binding;
     ImageView bottomsImage, topsImage, shoesImage;
-    ImageButton shuffleBottomsBtn, shuffleTopsBtn, shuffleShoesBtn, weatherButton;
+    ImageButton shuffleBottomsBtn, shuffleBottomsBtn2,shuffleTopsBtn,shuffleTopsBtn2, shuffleShoesBtn, shuffleShoesBtn2,weatherButton;
     Button shuffleOutfitBtn, saveOutfitBtn, showFilters, clearFiltersBtn;
     View view;
     BottomItemDAO bottomItemDAO;
@@ -147,8 +149,11 @@ public class ShuffleFragment extends Fragment {
         //buttons
         weatherButton = view.findViewById(R.id.weatherButton);
         shuffleBottomsBtn = view.findViewById(R.id.shuffleBottomsBtn);
+        shuffleBottomsBtn2 = view.findViewById(R.id.shuffleBottomsBtn2);
         shuffleTopsBtn = view.findViewById(R.id.shuffleShirtsBtn);
+        shuffleTopsBtn2 = view.findViewById(R.id.shuffleShirtsBtn2);
         shuffleShoesBtn = view.findViewById(R.id.shuffleShoesButton);
+        shuffleShoesBtn2 = view.findViewById(R.id.shuffleShoesButton2);
         shuffleOutfitBtn = view.findViewById(R.id.shuffleOutfitButton);
         saveOutfitBtn = view.findViewById(R.id.saveButton);
         showFilters = view.findViewById(R.id.filterButton);
@@ -187,7 +192,6 @@ public class ShuffleFragment extends Fragment {
                 moveButton("down");
                 showFilters.setText("No Filters");
             }
-
             filtersAdded = !filtersAdded;
         });
         //save outfit button listener
@@ -228,10 +232,19 @@ public class ShuffleFragment extends Fragment {
         shuffleTopsBtn.setOnClickListener(v -> {
             shuffleButton(topColor, topSeason, topCategory);
         });
+        shuffleTopsBtn2.setOnClickListener(v -> {
+            shuffleButton(topColor, topSeason, topCategory);
+        });
         shuffleBottomsBtn.setOnClickListener(v -> {
             shuffleButton(bottomColor, bottomSeason, bottomCategory);
         });
+        shuffleBottomsBtn2.setOnClickListener(v -> {
+            shuffleButton(bottomColor, bottomSeason, bottomCategory);
+        });
         shuffleShoesBtn.setOnClickListener(v -> {
+            shuffleButton(shoeColor, shoeSeason, shoeCategory);
+        });
+        shuffleShoesBtn2.setOnClickListener(v -> {
             shuffleButton(shoeColor, shoeSeason, shoeCategory);
         });
         shuffleOutfitBtn.setOnClickListener(v -> {
@@ -269,28 +282,25 @@ public class ShuffleFragment extends Fragment {
     }
 
     public void moveButton(String direction) {
-        ViewGroup.MarginLayoutParams topBtnParams = (ViewGroup.MarginLayoutParams) shuffleTopsBtn.getLayoutParams();
-        ViewGroup.MarginLayoutParams bottomBtnParams = (ViewGroup.MarginLayoutParams) shuffleBottomsBtn.getLayoutParams();
-        ViewGroup.MarginLayoutParams shoesBtnParams = (ViewGroup.MarginLayoutParams) shuffleShoesBtn.getLayoutParams();
-        ViewGroup.MarginLayoutParams newoutfitBtnParams = (ViewGroup.MarginLayoutParams) shuffleOutfitBtn.getLayoutParams();
         switch (direction) {
             case "down":
-                topBtnParams.topMargin += 300;
-                bottomBtnParams.topMargin += 300;
-                shoesBtnParams.topMargin += 300;
-                newoutfitBtnParams.leftMargin -= 500;
+                shuffleTopsBtn.setVisibility(View.GONE);
+                shuffleBottomsBtn.setVisibility(View.GONE);
+                shuffleShoesBtn.setVisibility(View.GONE);
+                shuffleTopsBtn2.setVisibility(View.VISIBLE);
+                shuffleBottomsBtn2.setVisibility(View.VISIBLE);
+                shuffleShoesBtn2.setVisibility(View.VISIBLE);
                 break;
             case "up":
-                topBtnParams.topMargin -= 300;
-                bottomBtnParams.topMargin -= 300;
-                shoesBtnParams.topMargin -= 300;
-                newoutfitBtnParams.leftMargin += 500;
-                break;
+                shuffleTopsBtn2.setVisibility(View.GONE);
+                shuffleBottomsBtn2.setVisibility(View.GONE);
+                shuffleShoesBtn2.setVisibility(View.GONE);
+                shuffleTopsBtn.setVisibility(View.VISIBLE);
+                shuffleBottomsBtn.setVisibility(View.VISIBLE);
+                shuffleShoesBtn.setVisibility(View.VISIBLE);
+               break;
         }
-        shuffleTopsBtn.setLayoutParams(topBtnParams);
-        shuffleBottomsBtn.setLayoutParams(bottomBtnParams);
-        shuffleShoesBtn.setLayoutParams(shoesBtnParams);
-        shuffleOutfitBtn.setLayoutParams(newoutfitBtnParams);
+
     }
 
     private void setTextViewClickListener(int textViewId, Set<String> selectedPreferences) {
