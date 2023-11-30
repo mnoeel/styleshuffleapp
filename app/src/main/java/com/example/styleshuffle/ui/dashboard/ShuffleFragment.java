@@ -1,5 +1,6 @@
 
 package com.example.styleshuffle.ui.dashboard;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,6 +34,7 @@ import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -68,24 +70,24 @@ import java.util.Set;
 
 public class ShuffleFragment extends Fragment {
     FragmentShuffleBinding binding;
-    ImageView bottomsImage,topsImage,shoesImage;
-    ImageButton shuffleBottomsBtn,shuffleTopsBtn,shuffleShoesBtn, weatherButton;
-    Button shuffleOutfitBtn,saveOutfitBtn, showFilters,clearFiltersBtn;
+    ImageView bottomsImage, topsImage, shoesImage;
+    ImageButton shuffleBottomsBtn, shuffleTopsBtn, shuffleShoesBtn, weatherButton;
+    Button shuffleOutfitBtn, saveOutfitBtn, showFilters, clearFiltersBtn;
     View view;
     BottomItemDAO bottomItemDAO;
     TopItemDAO topItemDAO;
     ShoeItemDAO shoeItemDAO;
     OutfitDAO outfitDAO;
     Drawable topDrawable, bottomDrawable, shoeDrawable;
-    Bitmap topBitmap,bottomBitmap, shoeBitmap;
-    TextInputLayout topColorTIL,topSeasonTIL,bottomColorTIL,bottomSeasonTIL,shoeColorTIL,shoeSeasonTIL;
+    Bitmap topBitmap, bottomBitmap, shoeBitmap;
+    TextInputLayout topColorTIL, topSeasonTIL, bottomColorTIL, bottomSeasonTIL, shoeColorTIL, shoeSeasonTIL;
     private boolean shuffleButtonsMoved = false;
-    boolean filtersAdded=false;
+    boolean filtersAdded = false;
     String[] listColor = {"Red", "Orange", "Yellow", "Green", "Blue", "Pink", "Purple", "White", "Black", "Brown", "Gray", "Multicolor"};
     String[] listSeason = {"Winter", "Spring", "Summer", "Fall"};
 
-    MultiAutoCompleteTextView topColor,topSeason,bottomColor,bottomSeason,shoeColor,shoeSeason;
-    ArrayAdapter<String> colorAdapter,seasonAdapter;
+    MultiAutoCompleteTextView topColor, topSeason, bottomColor, bottomSeason, shoeColor, shoeSeason;
+    ArrayAdapter<String> colorAdapter, seasonAdapter;
     Set<String> selectedTopColors = new HashSet<>();
     Set<String> selectedTopSeasons = new HashSet<>();
     Set<String> selectedBottomColors = new HashSet<>();
@@ -110,32 +112,32 @@ public class ShuffleFragment extends Fragment {
         topColor = view.findViewById(R.id.topColorTV); //add id
         topColor.setAdapter(colorAdapter);
         topColor.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());  // Use comma as the separator
-        topColorTIL=view.findViewById(R.id.topColor);
+        topColorTIL = view.findViewById(R.id.topColor);
         // Top Season Dropdown
         topSeason = view.findViewById(R.id.topSeasonTV); //ADD ID
         topSeason.setAdapter(seasonAdapter);
         topSeason.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-        topSeasonTIL=view.findViewById(R.id.topSeason);
+        topSeasonTIL = view.findViewById(R.id.topSeason);
         // Bottom Color Dropdown
         bottomColor = view.findViewById(R.id.bottomColorTV); //add id
         bottomColor.setAdapter(colorAdapter);
         bottomColor.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());  // Use comma as the separator
-        bottomColorTIL=view.findViewById(R.id.bottomColor);
+        bottomColorTIL = view.findViewById(R.id.bottomColor);
         // Bottom Season Dropdown
         bottomSeason = view.findViewById(R.id.bottomSeasonTV); //ADD ID
         bottomSeason.setAdapter(seasonAdapter);
         bottomSeason.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-        bottomSeasonTIL=view.findViewById(R.id.bottomSeason);
+        bottomSeasonTIL = view.findViewById(R.id.bottomSeason);
         // Shoe Color Dropdown
         shoeColor = view.findViewById(R.id.shoeColorTV); //add id
         shoeColor.setAdapter(colorAdapter);
         shoeColor.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());  // Use comma as the separator
-        shoeColorTIL=view.findViewById(R.id.shoeColor);
+        shoeColorTIL = view.findViewById(R.id.shoeColor);
         // Shoe Season Dropdown
         shoeSeason = view.findViewById(R.id.shoeSeasonTV); //ADD ID
         shoeSeason.setAdapter(seasonAdapter);
         shoeSeason.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-        shoeSeasonTIL=view.findViewById(R.id.shoeSeason);
+        shoeSeasonTIL = view.findViewById(R.id.shoeSeason);
         //images
         bottomsImage = view.findViewById(R.id.bottomsImage);
         topsImage = view.findViewById(R.id.shirtImage);
@@ -150,48 +152,46 @@ public class ShuffleFragment extends Fragment {
         shuffleOutfitBtn = view.findViewById(R.id.shuffleOutfitButton);
         saveOutfitBtn = view.findViewById(R.id.saveButton);
         showFilters = view.findViewById(R.id.filterButton);
-        clearFiltersBtn=view.findViewById(R.id.clearFilterBtn);
+        clearFiltersBtn = view.findViewById(R.id.clearFilterBtn);
 
 
+        //Weather DialogFragment
         weatherButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // openTempFragment();
                 TempFragment dialogFragment = new TempFragment();
                 dialogFragment.show(getChildFragmentManager(), "TempFragment");
             }
 
         });
-            //WeatherDialogFragment dialogFragment = new WeatherDialogFragment();
-            //dialogFragment.show(getChildFragmentManager(), "WeatherDialogFragment");
-
 
 
         //outfit db
         outfitDAO = UserDatabase.getDBInstance(requireContext()).outfitDAO();
 
-        clearFiltersBtn.setOnClickListener(v->{
-            clearFilters();});
+        clearFiltersBtn.setOnClickListener(v -> {
+            clearFilters();
+        });
 
-        showFilters.setOnClickListener(v-> {
-        if (filtersAdded) {
-            // If filters are added, remove them
-            clearFiltersBtn.setVisibility(View.GONE);
-            hideFilters();
-            moveButton("up");
-            showFilters.setText("Add Filters");
-        } else {
-            // If no filters are added, add them
-            clearFiltersBtn.setVisibility(View.VISIBLE);
-            showFilters();
-            moveButton("down");
-            showFilters.setText("No Filters");
-        }
+        showFilters.setOnClickListener(v -> {
+            if (filtersAdded) {
+                // If filters are added, remove them
+                clearFiltersBtn.setVisibility(View.GONE);
+                hideFilters();
+                moveButton("up");
+                showFilters.setText("Add Filters");
+            } else {
+                // If no filters are added, add them
+                clearFiltersBtn.setVisibility(View.VISIBLE);
+                showFilters();
+                moveButton("down");
+                showFilters.setText("No Filters");
+            }
 
-        filtersAdded = !filtersAdded;
-    });
+            filtersAdded = !filtersAdded;
+        });
         //save outfit button listener
-        saveOutfitBtn.setOnClickListener(v-> {
+        saveOutfitBtn.setOnClickListener(v -> {
             //convert images to bitmaps
             topDrawable = topsImage.getDrawable();
             bottomDrawable = bottomsImage.getDrawable();
@@ -209,34 +209,35 @@ public class ShuffleFragment extends Fragment {
                 bottomBitmap = ((BitmapDrawable) bottomDrawable).getBitmap();
                 shoeBitmap = ((BitmapDrawable) shoeDrawable).getBitmap();
 
-            Outfit outfit = new Outfit();
-            outfit.setTopImage(UserDataConverter.convertImage2ByteArray(topBitmap));
-            outfit.setBottomImage(UserDataConverter.convertImage2ByteArray(bottomBitmap));
-            outfit.setShoeImage(UserDataConverter.convertImage2ByteArray(shoeBitmap));
-            outfitDAO.insertOutfit(outfit);
+                Outfit outfit = new Outfit();
+                outfit.setTopImage(UserDataConverter.convertImage2ByteArray(topBitmap));
+                outfit.setBottomImage(UserDataConverter.convertImage2ByteArray(bottomBitmap));
+                outfit.setShoeImage(UserDataConverter.convertImage2ByteArray(shoeBitmap));
+                outfitDAO.insertOutfit(outfit);
 
-            Toast.makeText(
-                    requireContext(),
-                    "Cute Outfit!",
-                    Toast.LENGTH_SHORT
-            ).show();
-        }});
+                Toast.makeText(
+                        requireContext(),
+                        "Cute Outfit!",
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
+        });
 
 
         //shuffle button listeners
         shuffleTopsBtn.setOnClickListener(v -> {
-            shuffleButton(topColor,topSeason,topCategory);
+            shuffleButton(topColor, topSeason, topCategory);
         });
         shuffleBottomsBtn.setOnClickListener(v -> {
-            shuffleButton(bottomColor,bottomSeason,bottomCategory);
+            shuffleButton(bottomColor, bottomSeason, bottomCategory);
         });
         shuffleShoesBtn.setOnClickListener(v -> {
-            shuffleButton(shoeColor,shoeSeason,shoeCategory);
+            shuffleButton(shoeColor, shoeSeason, shoeCategory);
         });
         shuffleOutfitBtn.setOnClickListener(v -> {
-            shuffleButton(topColor,topSeason,topCategory);
-            shuffleButton(bottomColor,bottomSeason,bottomCategory);
-            shuffleButton(shoeColor,shoeSeason,shoeCategory);
+            shuffleButton(topColor, topSeason, topCategory);
+            shuffleButton(bottomColor, bottomSeason, bottomCategory);
+            shuffleButton(shoeColor, shoeSeason, shoeCategory);
         });
         setTextViewClickListener(R.id.topColorTV, selectedTopColors);
         setTextViewClickListener(R.id.topSeasonTV, selectedTopSeasons);
@@ -248,19 +249,6 @@ public class ShuffleFragment extends Fragment {
         return view;
     }
 
-    /*private void openTempFragment() {
-        // Create a new instance of YourFragment
-        TempFragment tempFragment = new TempFragment();
-
-        // Begin the transaction
-        getChildFragmentManager().beginTransaction()
-                .replace(R.id.fragmentShuffle, tempFragment)
-                .addToBackStack(null)
-                .commit();
-    }
-
-*/
-
 
     public void showFilters() {
         topColorTIL.setVisibility(View.VISIBLE);
@@ -270,6 +258,7 @@ public class ShuffleFragment extends Fragment {
         shoeColorTIL.setVisibility(View.VISIBLE);
         shoeSeasonTIL.setVisibility(View.VISIBLE);
     }
+
     public void hideFilters() {
         topColorTIL.setVisibility(View.GONE);
         topSeasonTIL.setVisibility(View.GONE);
@@ -284,7 +273,7 @@ public class ShuffleFragment extends Fragment {
         ViewGroup.MarginLayoutParams bottomBtnParams = (ViewGroup.MarginLayoutParams) shuffleBottomsBtn.getLayoutParams();
         ViewGroup.MarginLayoutParams shoesBtnParams = (ViewGroup.MarginLayoutParams) shuffleShoesBtn.getLayoutParams();
         ViewGroup.MarginLayoutParams newoutfitBtnParams = (ViewGroup.MarginLayoutParams) shuffleOutfitBtn.getLayoutParams();
-        switch(direction) {
+        switch (direction) {
             case "down":
                 topBtnParams.topMargin += 300;
                 bottomBtnParams.topMargin += 300;
@@ -315,7 +304,8 @@ public class ShuffleFragment extends Fragment {
                 String[] items = originalText.split(",");
                 List<String> itemList = new ArrayList<>(Arrays.asList(items));
                 itemList.remove(textToRemove);
-                String newText = TextUtils.join(",", itemList).replace("[", "").replace("]", "");;
+                String newText = TextUtils.join(",", itemList).replace("[", "").replace("]", "");
+                ;
                 textView.setText(newText);
                 if (!newText.isEmpty()) {
                     textView.setText(newText);
@@ -328,14 +318,13 @@ public class ShuffleFragment extends Fragment {
     }
 
 
-
     private void updateSelectedPreferenceTextView(MultiAutoCompleteTextView textView, Set<String> selectedPreferences) {
         if (!selectedPreferences.isEmpty()) {
             textView.setText(TextUtils.join(", ", selectedPreferences));
         }
     }
 
-    public void shuffleButton(MultiAutoCompleteTextView colorTV, MultiAutoCompleteTextView seasonTV,String category) {
+    public void shuffleButton(MultiAutoCompleteTextView colorTV, MultiAutoCompleteTextView seasonTV, String category) {
         String selectedColors = colorTV.getText().toString();
         List<String> selectedColorList = Arrays.asList(selectedColors.split(", "));
         String selectedSeasons = seasonTV.getText().toString();
@@ -352,39 +341,40 @@ public class ShuffleFragment extends Fragment {
             case "shoes":
                 shuffleShoes(selectedColors, selectedSeasons, selectedColorList, selectedSeasonList);
                 break;
-        }}
+        }
+    }
 
 
-
-
-    public void shuffleTops(String stringColors,String stringSeasons,List<String> selectedColors, List<String> selectedSeasons) {
+    public void shuffleTops(String stringColors, String stringSeasons, List<String> selectedColors, List<String> selectedSeasons) {
         topItemDAO = UserDatabase.getDBInstance(requireContext()).topItemDAO();
         List<TopItem> topItems = topItemDAO.getAllTopItems();
-        shuffleImagesWithFilters(stringColors,stringSeasons,topItems,topsImage,selectedColors,selectedSeasons);
+        shuffleImagesWithFilters(stringColors, stringSeasons, topItems, topsImage, selectedColors, selectedSeasons);
     }
-    public void shuffleBottoms(String stringColors,String stringSeasons,List<String> selectedColors, List<String> selectedSeasons) {
+
+    public void shuffleBottoms(String stringColors, String stringSeasons, List<String> selectedColors, List<String> selectedSeasons) {
         bottomItemDAO = UserDatabase.getDBInstance(requireContext()).bottomItemDAO();
         List<BottomItem> bottomItems = bottomItemDAO.getAllBottomItems();
-        shuffleImagesWithFilters(stringColors,stringSeasons,bottomItems,bottomsImage,selectedColors,selectedSeasons);
+        shuffleImagesWithFilters(stringColors, stringSeasons, bottomItems, bottomsImage, selectedColors, selectedSeasons);
     }
-    public void shuffleShoes(String stringColors,String stringSeasons,List<String> selectedColors, List<String> selectedSeasons) {
+
+    public void shuffleShoes(String stringColors, String stringSeasons, List<String> selectedColors, List<String> selectedSeasons) {
         shoeItemDAO = UserDatabase.getDBInstance(requireContext()).shoeItemDAO();
         List<ShoeItem> shoeItems = shoeItemDAO.getAllShoeItems();
-        shuffleImagesWithFilters(stringColors,stringSeasons,shoeItems,shoesImage,selectedColors,selectedSeasons);
+        shuffleImagesWithFilters(stringColors, stringSeasons, shoeItems, shoesImage, selectedColors, selectedSeasons);
     }
 
 
-    public void shuffleImagesWithFilters(String stringColors, String stringSeasons,List<? extends Item> items, ImageView imageView, List<String> selectedColors, List<String> selectedSeasons) {
+    public void shuffleImagesWithFilters(String stringColors, String stringSeasons, List<? extends Item> items, ImageView imageView, List<String> selectedColors, List<String> selectedSeasons) {
         List<Item> eligibleItems = new ArrayList<>();
         List<Item> colorMatchItems = new ArrayList<>();
         List<Item> seasonMatchItems = new ArrayList<>();
 
 
-        if(TextUtils.isEmpty(stringColors) && TextUtils.isEmpty(stringSeasons)) {
-            for(Item item : items) {
+        if (TextUtils.isEmpty(stringColors) && TextUtils.isEmpty(stringSeasons)) {
+            for (Item item : items) {
                 eligibleItems.add(item);
             }
-            shuffleImages(imageView,eligibleItems);
+            shuffleImages(imageView, eligibleItems);
         } else if (!TextUtils.isEmpty(stringColors) && TextUtils.isEmpty(stringSeasons)) {
             for (Item item : items) {
                 String itemColor = item.getColorOfItem();
@@ -392,15 +382,15 @@ public class ShuffleFragment extends Fragment {
                     colorMatchItems.add(item);
                 }
             }
-            shuffleImages(imageView,colorMatchItems);
-        } else if(TextUtils.isEmpty(stringColors) && !TextUtils.isEmpty(stringSeasons)) {
+            shuffleImages(imageView, colorMatchItems);
+        } else if (TextUtils.isEmpty(stringColors) && !TextUtils.isEmpty(stringSeasons)) {
             for (Item item : items) {
                 String itemSeason = item.getSeasonOfItem();
                 if (selectedSeasons.contains(itemSeason)) {
                     seasonMatchItems.add(item);
                 }
             }
-            shuffleImages(imageView,seasonMatchItems);
+            shuffleImages(imageView, seasonMatchItems);
         } else {
             for (Item item : items) {
                 String itemColor = item.getColorOfItem();
@@ -411,11 +401,12 @@ public class ShuffleFragment extends Fragment {
                     eligibleItems.add(item);
                 }
             }
-            shuffleImages(imageView,eligibleItems);
-        } }
+            shuffleImages(imageView, eligibleItems);
+        }
+    }
 
 
-    public void shuffleImages(ImageView imageView,List<Item> eligibleItems) {
+    public void shuffleImages(ImageView imageView, List<Item> eligibleItems) {
         if (!eligibleItems.isEmpty()) {
             Random random = new Random();
             int randomIndex = random.nextInt(eligibleItems.size());
@@ -423,14 +414,16 @@ public class ShuffleFragment extends Fragment {
             byte[] imageBytes = shuffledItem.getImage();
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
             imageView.setImageBitmap(bitmap);
-        } else{
+        } else {
             imageView.setImageDrawable(null);
             Toast.makeText(
                     requireContext(),
                     "Not enough items",
                     Toast.LENGTH_SHORT
-            ).show(); }
+            ).show();
+        }
     }
+
     public void clearFilters() {
         topColor.setText("");
         bottomColor.setText("");
@@ -442,7 +435,7 @@ public class ShuffleFragment extends Fragment {
 
 
     @Override
-    public void onDestroyView () {
+    public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
